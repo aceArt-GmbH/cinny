@@ -1,5 +1,6 @@
 import React from 'react';
 import './KeywordNotification.scss';
+import { useTranslation } from 'react-i18next';
 
 import initMatrix from '../../../client/initMatrix';
 import { openReusableContextMenu } from '../../../client/action/navigation';
@@ -165,56 +166,57 @@ function GlobalNotification() {
     addKeyword(value);
     keywordInput.value = '';
   };
+  const { t } = useTranslation();
 
   return (
     <div className="keyword-notification">
-      <MenuHeader>Mentions & keywords</MenuHeader>
+      <MenuHeader>{t('Organisms.Settings.keyword_notification.title')}</MenuHeader>
       <SettingTile
-        title="Message containing my display name"
+        title={t('Organisms.Settings.keyword_notification.display_name.title')}
         options={(
           <Button onClick={(evt) => onSelect(evt, DISPLAY_NAME)} iconSrc={ChevronBottomIC}>
-            { typeToLabel[rulesToType[DISPLAY_NAME]] }
+            { t(typeToLabel[rulesToType[DISPLAY_NAME]]) }
           </Button>
         )}
-        content={<Text variant="b3">Default notification settings for all message containing your display name.</Text>}
+        content={<Text variant="b3">{t('Organisms.Settings.keyword_notification.display_name.description')}</Text>}
       />
       <SettingTile
-        title="Message containing my username"
+        title={t('Organisms.Settings.keyword_notification.username.title')}
         options={(
           <Button onClick={(evt) => onSelect(evt, USERNAME)} iconSrc={ChevronBottomIC}>
-            { typeToLabel[rulesToType[USERNAME]] }
+            { t(typeToLabel[rulesToType[USERNAME]]) }
           </Button>
         )}
-        content={<Text variant="b3">Default notification settings for all message containing your username.</Text>}
+        content={<Text variant="b3">{t('Organisms.Settings.keyword_notification.username.description')}</Text>}
       />
       <SettingTile
-        title="Message containing @room"
+        title={t('Organisms.Settings.keyword_notification.room.title')}
         options={(
           <Button onClick={(evt) => onSelect(evt, ROOM_PING)} iconSrc={ChevronBottomIC}>
-            {typeToLabel[rulesToType[ROOM_PING]]}
+            {t(typeToLabel[rulesToType[ROOM_PING]])}
           </Button>
         )}
-        content={<Text variant="b3">Default notification settings for all messages containing @room.</Text>}
+        content={<Text variant="b3">{t('Organisms.Settings.keyword_notification.room.description')}</Text>}
       />
       { rulesToType[KEYWORD] && (
         <SettingTile
-          title="Message containing keywords"
+          title={t('Organisms.Settings.keyword_notification.keywords.title')}
           options={(
             <Button onClick={(evt) => onSelect(evt, KEYWORD)} iconSrc={ChevronBottomIC}>
-              {typeToLabel[rulesToType[KEYWORD]]}
+              {t(typeToLabel[rulesToType[KEYWORD]])}
             </Button>
           )}
-          content={<Text variant="b3">Default notification settings for all message containing keywords.</Text>}
+          content={<Text variant="b3">{t('Organisms.Settings.keyword_notification.keywords.description')}</Text>}
         />
       )}
       <SettingTile
-        title="Keywords"
+        title={t('Organisms.Settings.keywords.title')}
         content={(
           <div className="keyword-notification__keyword">
-            <Text variant="b3">Get notification when a message contains keyword.</Text>
+            <Text variant="b3">{t('Organisms.Settings.keywords.description')}</Text>
             <form onSubmit={handleSubmit}>
               <Input name="keywordInput" required />
-              <Button variant="primary" type="submit">Add</Button>
+              <Button variant="primary" type="submit">{t('common.add')}</Button>
             </form>
             {keywordRules.length > 0 && (
               <div>

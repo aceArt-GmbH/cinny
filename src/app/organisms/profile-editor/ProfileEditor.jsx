@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
+import { useTranslation } from 'react-i18next';
 import { twemojify } from '../../../util/twemojify';
 
 import initMatrix from '../../../client/initMatrix';
@@ -37,13 +38,14 @@ function ProfileEditor({ userId }) {
       isMounted = false;
     };
   }, [userId]);
+  const { t } = useTranslation();
 
   const handleAvatarUpload = async (url) => {
     if (url === null) {
       const isConfirmed = await confirmDialog(
-        'Remove avatar',
-        'Are you sure that you want to remove avatar?',
-        'Remove',
+        t('Organisms.Settings.profile.dialog.title'),
+        t('Organisms.Settings.profile.dialog.description'),
+        t('Organisms.Settings.profile.dialog.confirm'),
         'caution',
       );
       if (isConfirmed) {
@@ -82,13 +84,13 @@ function ProfileEditor({ userId }) {
       onSubmit={(e) => { e.preventDefault(); saveDisplayName(); }}
     >
       <Input
-        label={`Display name of ${mx.getUserId()}`}
+        label={`${t('Organisms.Settings.profile.display_name')} ${mx.getUserId()}`}
         onChange={onDisplayNameInputChange}
         value={mx.getUser(mx.getUserId()).displayName}
         forwardRef={displayNameRef}
       />
-      <Button variant="primary" type="submit" disabled={disabled}>Save</Button>
-      <Button onClick={cancelDisplayNameChanges}>Cancel</Button>
+      <Button variant="primary" type="submit" disabled={disabled}>{t('common.save')}</Button>
+      <Button onClick={cancelDisplayNameChanges}>{t('common.cancel')}</Button>
     </form>
   );
 
@@ -99,7 +101,7 @@ function ProfileEditor({ userId }) {
         <IconButton
           src={PencilIC}
           size="extra-small"
-          tooltip="Edit"
+          tooltip={t('common.edit')}
           onClick={() => setIsEditing(true)}
         />
       </div>

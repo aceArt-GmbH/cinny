@@ -32,6 +32,7 @@ import { isKeyHotkey } from 'is-hotkey';
 import classNames from 'classnames';
 import { MatrixClient, Room } from 'matrix-js-sdk';
 import { atom, useAtomValue, useSetAtom } from 'jotai';
+import { useTranslation, Trans } from 'react-i18next';
 
 import * as css from './EmojiBoard.css';
 import { EmojiGroupId, IEmoji, IEmojiGroup, emojiGroups, emojis } from '../../plugins/emoji';
@@ -260,7 +261,7 @@ export const EmojiGroup = as<
     ref={ref}
   >
     <Text id={`EmojiGroup-${id}-label`} as="label" className={css.EmojiGroupLabel} size="O400">
-      {label}
+      <Trans i18nKey={label} />
     </Text>
     <div aria-labelledby={`EmojiGroup-${id}-label`} className={css.EmojiGroupContent}>
       <Box wrap="Wrap" justifyContent="Center">
@@ -334,13 +335,14 @@ export function StickerItem({
 
 function RecentEmojiSidebarStack({ onItemClick }: { onItemClick: (id: string) => void }) {
   const activeGroupId = useAtomValue(activeGroupIdAtom);
+  const { t } = useTranslation();
 
   return (
     <SidebarStack>
       <SidebarBtn
         active={activeGroupId === RECENT_GROUP_ID}
         id={RECENT_GROUP_ID}
-        label="Recent"
+        label={t('common.recent')}
         onItemClick={() => onItemClick(RECENT_GROUP_ID)}
       >
         <Icon src={Icons.RecentClock} filled={activeGroupId === RECENT_GROUP_ID} />
@@ -403,6 +405,7 @@ function NativeEmojiSidebarStack({
   onItemClick: (id: EmojiGroupId) => void;
 }) {
   const activeGroupId = useAtomValue(activeGroupIdAtom);
+  const { t } = useTranslation();
   return (
     <SidebarStack className={css.NativeEmojiSidebarStack}>
       <SidebarDivider />
@@ -411,7 +414,7 @@ function NativeEmojiSidebarStack({
           key={group.id}
           active={activeGroupId === group.id}
           id={group.id}
-          label={labels[group.id]}
+          label={t(labels[group.id])}
           onItemClick={onItemClick}
         >
           <Icon src={icons[group.id]} filled={activeGroupId === group.id} />
@@ -762,6 +765,7 @@ export function EmojiBoard({
       top: 0,
     });
   }, [result, emojiTab, syncActiveGroupId]);
+  const { t } = useTranslation();
 
   return (
     <FocusTrap
@@ -786,7 +790,7 @@ export function EmojiBoard({
                 data-emoji-board-search
                 variant="SurfaceVariant"
                 size="400"
-                placeholder={allowTextCustomEmoji ? 'Search or Text Reaction ' : 'Search'}
+                placeholder={allowTextCustomEmoji ? 'Search or Text Reaction ' : t('common.search')}
                 maxLength={50}
                 after={
                   allowTextCustomEmoji && result?.query ? (
@@ -892,7 +896,7 @@ export function EmojiBoard({
                 />
               )}
               {emojiTab && recentEmojis.length > 0 && (
-                <RecentEmojiGroup id={RECENT_GROUP_ID} label="Recent" emojis={recentEmojis} />
+                <RecentEmojiGroup id={RECENT_GROUP_ID} label={t('common.recent')} emojis={recentEmojis} />
               )}
               {emojiTab && <CustomEmojiGroups mx={mx} groups={imagePacks} />}
               {stickerTab && <StickerGroups mx={mx} groups={imagePacks} />}

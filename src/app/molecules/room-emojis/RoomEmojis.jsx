@@ -1,6 +1,7 @@
 import React, { useReducer, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import './RoomEmojis.scss';
+import { useTranslation } from 'react-i18next';
 
 import initMatrix from '../../../client/initMatrix';
 import { suffixRename } from '../../../util/common';
@@ -79,6 +80,7 @@ function RoomEmojis({ roomId }) {
   const room = mx.getRoom(roomId);
 
   const { usablePacks, createPack, deletePack } = useRoomPacks(room);
+  const { t } = useTranslation();
 
   const canChange = room.currentState.maySendStateEvent('im.ponies.room_emote', mx.getUserId());
 
@@ -96,10 +98,10 @@ function RoomEmojis({ roomId }) {
     <div className="room-emojis">
       { canChange && (
         <div className="room-emojis__add-pack">
-          <MenuHeader>Create Pack</MenuHeader>
+          <MenuHeader>{t('Molecules.RoomEmojis.header')}</MenuHeader>
           <form onSubmit={handlePackCreate}>
-            <Input name="nameInput" placeholder="Pack Name" required />
-            <Button variant="primary" type="submit">Create pack</Button>
+            <Input name="nameInput" placeholder={t('Molecules.RoomEmojis.name_placeholder')} required />
+            <Button variant="primary" type="submit">{t('Molecules.RoomEmojis.submit_button')}</Button>
           </form>
         </div>
       )}
@@ -114,7 +116,7 @@ function RoomEmojis({ roomId }) {
             />
           )) : (
             <div className="room-emojis__empty">
-              <Text>No emoji or sticker pack.</Text>
+              <Text>{t('Molecules.RoomEmojis.no_packs')}</Text>
             </div>
           )
       }
