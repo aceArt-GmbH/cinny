@@ -1,6 +1,7 @@
 import { Avatar, AvatarImage, Box, Button, Text } from 'folds';
 import { IIdentityProvider, createClient } from 'matrix-js-sdk';
 import React, { useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useAutoDiscoveryInfo } from '../../hooks/useAutoDiscoveryInfo';
 
 type SSOLoginProps = {
@@ -14,6 +15,7 @@ export function SSOLogin({ providers, redirectUrl, asIcons }: SSOLoginProps) {
   const mx = useMemo(() => createClient({ baseUrl }), [baseUrl]);
 
   const getSSOIdUrl = (ssoId: string): string => mx.getSsoLoginUrl(redirectUrl, 'sso', ssoId);
+  const { t } = useTranslation();
 
   const anyAsBtn = providers.find(
     (provider) => !provider.icon || !mx.mxcUrlToHttp(provider.icon, 96, 96, 'crop', false)
@@ -25,7 +27,7 @@ export function SSOLogin({ providers, redirectUrl, asIcons }: SSOLoginProps) {
         const { id, name, icon } = provider;
         const iconUrl = icon && mx.mxcUrlToHttp(icon, 96, 96, 'crop', false);
 
-        const buttonTitle = `Continue with ${name}`;
+        const buttonTitle = `${t('Pages.Auth.continue')} ${name}`;
 
         if (!anyAsBtn && iconUrl && asIcons) {
           return (

@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import './RoomViewHeader.scss';
+import { useTranslation } from 'react-i18next';
 
 import { twemojify } from '../../../util/twemojify';
 import { blurOnBubbling } from '../../atoms/button/script';
@@ -76,13 +77,14 @@ function RoomViewHeader({ roomId }) {
       <RoomOptions roomId={roomId} afterOptionSelect={closeMenu} />
     ));
   };
+  const { t } = useTranslation();
 
   return (
     <Header>
       <IconButton
         src={BackArrowIC}
         className="room-header__back-btn"
-        tooltip="Return to navigation"
+        tooltip={t('Organisms.RoomViewHeader.return_navigation')}
         onClick={() => openNavigation()}
       />
       <button
@@ -103,25 +105,25 @@ function RoomViewHeader({ roomId }) {
       {mx.isRoomEncrypted(roomId) === false && (
         <IconButton
           onClick={() => toggleRoomSettings(tabText.SEARCH)}
-          tooltip="Search"
+          tooltip={t('Organisms.RoomViewHeader.search_tooltip')}
           src={SearchIC}
         />
       )}
       <IconButton
         className="room-header__drawer-btn"
         onClick={() => {
-          setPeopleDrawer((t) => !t);
+          setPeopleDrawer((toggle) => !toggle);
         }}
-        tooltip="People"
+        tooltip={t('Organisms.RoomViewHeader.people_tooltip')}
         src={UserIC}
       />
       <IconButton
         className="room-header__members-btn"
         onClick={() => toggleRoomSettings(tabText.MEMBERS)}
-        tooltip="Members"
+        tooltip={t('Organisms.RoomViewHeader.members_tooltip')}
         src={UserIC}
       />
-      <IconButton onClick={openRoomOptions} tooltip="Options" src={VerticalMenuIC} />
+      <IconButton onClick={openRoomOptions} tooltip={t('common.options')} src={VerticalMenuIC} />
     </Header>
   );
 }

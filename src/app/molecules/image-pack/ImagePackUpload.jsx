@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import './ImagePackUpload.scss';
+import { useTranslation } from 'react-i18next';
 
 import initMatrix from '../../../client/initMatrix';
 import { scaleDownImage } from '../../../util/common';
@@ -47,6 +48,7 @@ function ImagePackUpload({ onUpload }) {
     inputRef.current.value = null;
     shortcodeRef.current.value = '';
   };
+  const { t } = useTranslation();
 
   return (
     <form onSubmit={handleSubmit} className="image-pack-upload">
@@ -55,14 +57,14 @@ function ImagePackUpload({ onUpload }) {
         imgFile
           ? (
             <div className="image-pack-upload__file">
-              <IconButton onClick={handleRemove} src={CirclePlusIC} tooltip="Remove file" />
+              <IconButton onClick={handleRemove} src={CirclePlusIC} tooltip={t('Molecules.ImagePack.remove_file')} />
               <Text>{imgFile.name}</Text>
             </div>
           )
-          : <Button onClick={() => inputRef.current.click()}>Import image</Button>
+          : <Button onClick={() => inputRef.current.click()}>{t('Molecules.ImagePack.import_image')}</Button>
       }
-      <Input forwardRef={shortcodeRef} name="shortcodeInput" placeholder="shortcode" required />
-      <Button disabled={progress} variant="primary" type="submit">{progress ? 'Uploading...' : 'Upload'}</Button>
+      <Input forwardRef={shortcodeRef} name="shortcodeInput" placeholder={t('Molecules.ImagePack.shortcode')} required />
+      <Button disabled={progress} variant="primary" type="submit">{t(progress ? 'Molecules.ImagePack.uploading' : 'Molecules.ImagePack.upload')}</Button>
     </form>
   );
 }

@@ -23,6 +23,7 @@ import { Editor, Transforms } from 'slate';
 import { ReactEditor } from 'slate-react';
 import { IContent, MatrixEvent, RelationType, Room } from 'matrix-js-sdk';
 import { isKeyHotkey } from 'is-hotkey';
+import { useTranslation } from 'react-i18next';
 import {
   AUTOCOMPLETE_PREFIXES,
   AutocompletePrefix,
@@ -209,6 +210,7 @@ export const MessageEditor = as<'div', MessageEditorProps>(
         onCancel();
       }
     }, [saveState, onCancel]);
+    const { t } = useTranslation();
 
     return (
       <div {...props} ref={ref}>
@@ -262,10 +264,10 @@ export const MessageEditor = as<'div', MessageEditorProps>(
                       ) : undefined
                     }
                   >
-                    <Text size="B300">Save</Text>
+                    <Text size="B300">{t('common.save')}</Text>
                   </Chip>
                   <Chip onClick={onCancel} variant="SurfaceVariant" radii="Pill">
-                    <Text size="B300">Cancel</Text>
+                    <Text size="B300">{t('common.cancel')}</Text>
                   </Chip>
                 </Box>
                 <Box gap="Inherit">

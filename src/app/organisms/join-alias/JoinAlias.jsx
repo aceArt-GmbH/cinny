@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import './JoinAlias.scss';
+import { useTranslation } from 'react-i18next';
 
 import initMatrix from '../../../client/initMatrix';
 import cons from '../../../client/state/cons';
@@ -29,6 +30,8 @@ function JoinAliasContent({ term, requestClose }) {
   const mx = initMatrix.matrixClient;
   const mountStore = useStore();
 
+  const { t } = useTranslation();
+
   const openRoom = (roomId) => {
     const room = mx.getRoom(roomId);
     if (!room) return;
@@ -54,10 +57,10 @@ function JoinAliasContent({ term, requestClose }) {
     const alias = e.target.alias.value;
     if (alias?.trim() === '') return;
     if (alias.match(ALIAS_OR_ID_REG) === null) {
-      setError('Invalid address.');
+      setError(t('Organisms.JoinAlias.invalid_address'));
       return;
     }
-    setProcess('Looking for address...');
+    setProcess(t('Organisms.JoinAlias.looking_for_address'));
     setError(undefined);
     let via;
     if (alias.startsWith('#')) {
@@ -65,12 +68,12 @@ function JoinAliasContent({ term, requestClose }) {
         const aliasData = await mx.getRoomIdForAlias(alias);
         via = aliasData?.servers.slice(0, 3) || [];
         if (mountStore.getItem()) {
-          setProcess(`Joining ${alias}...`);
+          setProcess(t('Organisms.JoinAlias.joining_alias', { alias_name: alias }));
         }
       } catch (err) {
         if (!mountStore.getItem()) return;
         setProcess(false);
-        setError(`Unable to find room/space with ${alias}. Either room/space is private or doesn't exist.`);
+        setError(t('Organisms.JoinAlias.couldnt_find_room_or_space_alias', { alias_name: alias }));
       }
     }
     try {
@@ -81,14 +84,14 @@ function JoinAliasContent({ term, requestClose }) {
     } catch {
       if (!mountStore.getItem()) return;
       setProcess(false);
-      setError(`Unable to join ${alias}. Either room/space is private or doesn't exist.`);
+      setError(t('Organisms.JoinAlias.couldnt_find_room_or_space', { alias_name: alias }));
     }
   };
 
   return (
     <form className="join-alias" onSubmit={handleSubmit}>
       <Input
-        label="Address"
+        label={t('Organisms.JoinAlias.address_label')}
         value={term}
         name="alias"
         required
@@ -103,7 +106,7 @@ function JoinAliasContent({ term, requestClose }) {
                 <Text>{process}</Text>
               </>
             )
-            : <Button variant="primary" type="submit">Join</Button>
+            : <Button variant="primary" type="submit">{t('common.join')}</Button>
         }
       </div>
     </form>
@@ -137,14 +140,15 @@ function useWindowToggle() {
 
 function JoinAlias() {
   const [data, requestClose] = useWindowToggle();
+  const { t } = useTranslation();
 
   return (
     <Dialog
       isOpen={data !== null}
       title={(
-        <Text variant="s1" weight="medium" primary>Join with address</Text>
+        <Text variant="s1" weight="medium" primary>{t('Organisms.JoinAlias.title')}</Text>
       )}
-      contentOptions={<IconButton src={CrossIC} onClick={requestClose} tooltip="Close" />}
+      contentOptions={<IconButton src={CrossIC} onClick={requestClose} tooltip={t('common.close')} />}
       onRequestClose={requestClose}
     >
       { data ? <JoinAliasContent term={data.term} requestClose={requestClose} /> : <div /> }

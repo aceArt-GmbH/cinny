@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import './ImagePackProfile.scss';
+import { useTranslation } from 'react-i18next';
 
 import { openReusableContextMenu } from '../../../client/action/navigation';
 import { getEventCords } from '../../../util/common';
@@ -48,6 +49,7 @@ function ImagePackProfile({
       ),
     );
   };
+  const { t } = useTranslation();
 
   return (
     <div className="image-pack-profile">
@@ -70,18 +72,18 @@ function ImagePackProfile({
           isEdit
             ? (
               <form onSubmit={handleSubmit}>
-                <Input name="nameInput" label="Name" value={displayName} required />
-                <Input name="attributionInput" label="Attribution" value={attribution} resizable />
+                <Input name="nameInput" label={t('Molecules.ImagePack.name')} value={displayName} required />
+                <Input name="attributionInput" label={t('Molecules.ImagePack.attribution')} value={attribution} resizable />
                 <div>
-                  <Button variant="primary" type="submit">Save</Button>
-                  <Button onClick={() => setIsEdit(false)}>Cancel</Button>
+                  <Button variant="primary" type="submit">{t('common.save')}</Button>
+                  <Button onClick={() => setIsEdit(false)}>{t('common.cancel')}</Button>
                 </div>
               </form>
             ) : (
               <>
                 <div>
                   <Text>{displayName}</Text>
-                  {onEditProfile && <IconButton size="extra-small" onClick={() => setIsEdit(true)} src={PencilIC} tooltip="Edit" />}
+                  {onEditProfile && <IconButton size="extra-small" onClick={() => setIsEdit(true)} src={PencilIC} tooltip={t('common.edit')} />}
                 </div>
                 {attribution && <Text variant="b3">{attribution}</Text>}
               </>
@@ -89,15 +91,15 @@ function ImagePackProfile({
         }
       </div>
       <div className="image-pack-profile__usage">
-        <Text variant="b3">Pack usage</Text>
+        <Text variant="b3">{t('Molecules.ImagePack.pack_usage')}</Text>
         <Button
           onClick={onUsageChange ? handleUsageSelect : undefined}
           iconSrc={onUsageChange ? ChevronBottomIC : null}
         >
           <Text>
-            {usage === 'emoticon' && 'Emoji'}
-            {usage === 'sticker' && 'Sticker'}
-            {usage === 'both' && 'Both'}
+            {usage === 'emoticon' && t('Molecules.ImagePack.emoji')}
+            {usage === 'sticker' && t('Molecules.ImagePack.sticker')}
+            {usage === 'both' && t('Molecules.ImagePack.both')}
           </Text>
         </Button>
       </div>

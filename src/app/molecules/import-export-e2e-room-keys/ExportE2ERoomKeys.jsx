@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './ExportE2ERoomKeys.scss';
+import { useTranslation } from 'react-i18next';
 
 import FileSaver from 'file-saver';
 
@@ -77,13 +78,14 @@ function ExportE2ERoomKeys() {
       isMountStore.setItem(false);
     };
   }, []);
+  const { t } = useTranslation();
 
   return (
     <div className="export-e2e-room-keys">
       <form className="export-e2e-room-keys__form" onSubmit={(e) => { e.preventDefault(); exportE2ERoomKeys(); }}>
-        <Input forwardRef={passwordRef} type="password" placeholder="Password" required />
-        <Input forwardRef={confirmPasswordRef} type="password" placeholder="Confirm password" required />
-        <Button disabled={status.isOngoing} variant="primary" type="submit">Export</Button>
+        <Input forwardRef={passwordRef} type="password" placeholder={t('Organisms.Settings.security.export_encryption_keys.password')} required />
+        <Input forwardRef={confirmPasswordRef} type="password" placeholder={t('Organisms.Settings.security.export_encryption_keys.confirm_password')} required />
+        <Button disabled={status.isOngoing} variant="primary" type="submit">{t('Organisms.Settings.security.export_encryption_keys.export')}</Button>
       </form>
       { status.type === cons.status.IN_FLIGHT && (
         <div className="import-e2e-room-keys__process">

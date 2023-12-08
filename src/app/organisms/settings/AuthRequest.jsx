@@ -41,10 +41,10 @@ function SsoAuthRequest({ onComplete, makeRequest, session }) {
     return (
       <div className="auth-request">
         <div className="sso-dialog">
-          <Text variant="s1" weight="medium">Use Single Sign On to continue</Text>
-          <Text>To continue, use Single Sign On to prove your identity.</Text>
+          <Text variant="s1" weight="medium">Single Sign On verwenden</Text>
+          <Text>Um fortzufahren, verwenden Sie Single Sign On, um Ihre Identität nachzuweisen.</Text>
           <div className="buttons-container">
-            { ssoPressed ? <Button variant="primary" onClick={handleConfirm}>Confirm</Button> : <Button variant="primary" onClick={handleSso}>Single Sign-On</Button>}
+            { ssoPressed ? <Button variant="primary" onClick={handleConfirm}>Bestätigen</Button> : <Button variant="primary" onClick={handleSso}>Single Sign-On</Button>}
           </div>
         </div>
       </div>

@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './SSOButtons.scss';
+import { useTranslation } from 'react-i18next';
 
 import { createTemporaryClient, startSsoLogin } from '../../../client/action/auth';
 
@@ -11,6 +12,7 @@ function SSOButtons({ type, identityProviders, baseUrl }) {
   function handleClick(id) {
     startSsoLogin(baseUrl, type, id);
   }
+  const { t } = useTranslation();
   return (
     <div className="sso-buttons">
       {identityProviders
@@ -24,7 +26,7 @@ function SSOButtons({ type, identityProviders, baseUrl }) {
               <button key={idp.id} type="button" className="sso-btn" onClick={() => handleClick(idp.id)}>
                 <img className="sso-btn__img" src={tempClient.mxcUrlToHttp(idp.icon)} alt={idp.name} />
               </button>
-            ) : <Button key={idp.id} className="sso-btn__text-only" onClick={() => handleClick(idp.id)}>{`Login with ${idp.name}`}</Button>
+            ) : <Button key={idp.id} className="sso-btn__text-only" onClick={() => handleClick(idp.id)}>{t('Molecules.SSOButtons.login_with', { idp_name: idp.name })}</Button>
         ))}
     </div>
   );

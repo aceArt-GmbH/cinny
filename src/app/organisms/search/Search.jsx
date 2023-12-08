@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './Search.scss';
 
+import { useTranslation } from 'react-i18next';
 import initMatrix from '../../../client/initMatrix';
 import cons from '../../../client/state/cons';
 import navigation from '../../../client/state/navigation';
@@ -81,6 +82,8 @@ function Search() {
   const searchRef = useRef(null);
   const mx = initMatrix.matrixClient;
   const { navigateRoom, navigateSpace } = useRoomNavigate();
+
+  const { t } = useTranslation();
 
   const handleSearchResults = (chunk, term) => {
     setResult({
@@ -214,7 +217,7 @@ function Search() {
           }}
         >
           <RawIcon src={SearchIC} size="small" />
-          <Input onChange={handleOnChange} forwardRef={searchRef} placeholder="Search" />
+          <Input onChange={handleOnChange} forwardRef={searchRef} placeholder={t('common.search')} />
           <IconButton size="small" src={CrossIC} type="reset" onClick={handleCross} tabIndex={-1} />
         </form>
         <div className="search-dialog__content-wrapper">
@@ -225,7 +228,7 @@ function Search() {
           </ScrollView>
         </div>
         <div className="search-dialog__footer">
-          <Text variant="b3">Type # for rooms, @ for DMs and * for spaces. Hotkey: Strg + k</Text>
+          <Text variant="b3">{t('Organisms.Search.description')}</Text>
         </div>
       </div>
     </RawModal>

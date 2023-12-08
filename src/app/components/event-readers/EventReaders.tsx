@@ -14,6 +14,7 @@ import {
   config,
 } from 'folds';
 import { Room } from 'matrix-js-sdk';
+import { useTranslation } from 'react-i18next';
 import { useRoomEventReaders } from '../../hooks/useRoomEventReaders';
 import { getMemberDisplayName } from '../../utils/room';
 import { getMxIdLocalPart } from '../../utils/matrix';
@@ -35,6 +36,8 @@ export const EventReaders = as<'div', EventReadersProps>(
     const getName = (userId: string) =>
       getMemberDisplayName(room, userId) ?? getMxIdLocalPart(userId) ?? userId;
 
+    const { t } = useTranslation();
+
     return (
       <Box
         className={classNames(css.EventReaders, className)}
@@ -44,7 +47,7 @@ export const EventReaders = as<'div', EventReadersProps>(
       >
         <Header className={css.Header} variant="Surface" size="600">
           <Box grow="Yes">
-            <Text size="H3">Seen by</Text>
+            <Text size="H3">{t('Components.EventReaders.seen_by')}</Text>
           </Box>
           <IconButton size="300" onClick={requestClose}>
             <Icon src={Icons.Cross} />

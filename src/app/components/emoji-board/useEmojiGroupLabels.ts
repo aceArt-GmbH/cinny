@@ -6,14 +6,14 @@ export type IEmojiGroupLabels = Record<EmojiGroupId, string>;
 export const useEmojiGroupLabels = (): IEmojiGroupLabels =>
   useMemo(
     () => ({
-      [EmojiGroupId.People]: 'Smileys & People',
-      [EmojiGroupId.Nature]: 'Animals & Nature',
-      [EmojiGroupId.Food]: 'Food & Drinks',
-      [EmojiGroupId.Activity]: 'Activity',
-      [EmojiGroupId.Travel]: 'Travel & Places',
-      [EmojiGroupId.Object]: 'Objects',
-      [EmojiGroupId.Symbol]: 'Symbols',
-      [EmojiGroupId.Flag]: 'Flags',
+      [EmojiGroupId.People]: 'Components.Emoji.people',
+      [EmojiGroupId.Nature]: 'Components.Emoji.nature',
+      [EmojiGroupId.Food]: 'Components.Emoji.food',
+      [EmojiGroupId.Activity]: 'Components.Emoji.activity',
+      [EmojiGroupId.Travel]: 'Components.Emoji.travel',
+      [EmojiGroupId.Object]: 'Components.Emoji.objects',
+      [EmojiGroupId.Symbol]: 'Components.Emoji.symbols',
+      [EmojiGroupId.Flag]: 'Components.Emoji.flags',
     }),
     []
   );

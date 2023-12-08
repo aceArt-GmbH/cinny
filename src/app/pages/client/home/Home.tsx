@@ -18,6 +18,7 @@ import {
 import { useVirtualizer } from '@tanstack/react-virtual';
 import { useAtom, useAtomValue } from 'jotai';
 import FocusTrap from 'focus-trap-react';
+import { useTranslation } from 'react-i18next';
 import { factoryRoomIdByActivity, factoryRoomIdByAtoZ } from '../../../utils/sort';
 import {
   NavButton,
@@ -60,6 +61,7 @@ const HomeMenu = forwardRef<HTMLDivElement, HomeMenuProps>(({ requestClose }, re
     orphanRooms.forEach((rId) => markAsRead(rId));
     requestClose();
   };
+  const { t } = useTranslation();
 
   return (
     <Menu ref={ref} style={{ maxWidth: toRem(160), width: '100vw' }}>
@@ -72,7 +74,7 @@ const HomeMenu = forwardRef<HTMLDivElement, HomeMenuProps>(({ requestClose }, re
           aria-disabled={!unread}
         >
           <Text style={{ flexGrow: 1 }} as="span" size="T300" truncate>
-            Mark as Read
+            {t('Organisms.RoomCommon.mark_as_read')}
           </Text>
         </MenuItem>
       </Box>
@@ -133,6 +135,7 @@ function HomeHeader() {
 
 function HomeEmpty() {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   return (
     <NavEmptyCenter>
@@ -140,12 +143,12 @@ function HomeEmpty() {
         icon={<Icon size="600" src={Icons.Hash} />}
         title={
           <Text size="H5" align="Center">
-            No Rooms
+            {t('Organisms.Home.no_room')}
           </Text>
         }
         content={
           <Text size="T300" align="Center">
-            You do not have any rooms yet.
+            {t('Organisms.Home.no_room_yet')}
           </Text>
         }
         options={
@@ -197,6 +200,7 @@ export function Home() {
   const handleCategoryClick = useCategoryHandler(setClosedCategories, (categoryId) =>
     closedCategories.has(categoryId)
   );
+  const { t } = useTranslation();
 
   return (
     <PageNav>
@@ -216,7 +220,7 @@ export function Home() {
                       </Avatar>
                       <Box as="span" grow="Yes">
                         <Text as="span" size="Inherit" truncate>
-                          Create Room
+                          {t('Organisms.DrawerHeader.create_new_room')}
                         </Text>
                       </Box>
                     </Box>
@@ -232,7 +236,7 @@ export function Home() {
                       </Avatar>
                       <Box as="span" grow="Yes">
                         <Text as="span" size="Inherit" truncate>
-                          Join with Address
+                          {t('Organisms.DrawerHeader.join_with_address')}
                         </Text>
                       </Box>
                     </Box>
@@ -248,7 +252,7 @@ export function Home() {
                       </Avatar>
                       <Box as="span" grow="Yes">
                         <Text as="span" size="Inherit" truncate>
-                          Message Search
+                          {t('Molecules.RoomSearch.subtitle')}
                         </Text>
                       </Box>
                     </Box>

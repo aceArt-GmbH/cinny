@@ -4,6 +4,7 @@ import React, {
 import PropTypes from 'prop-types';
 import './RoomMembers.scss';
 
+import { useTranslation } from 'react-i18next';
 import initMatrix from '../../../client/initMatrix';
 import colorMXID from '../../../util/colorMXID';
 import { openProfileViewer } from '../../../client/action/navigation';
@@ -113,6 +114,8 @@ function RoomMembers({ roomId }) {
   const [members] = useMemberOfMembership(roomId, membership);
   const [searchMembers, handleSearch] = useSearchMembers(members);
 
+  const { t } = useTranslation();
+
   useEffect(() => {
     setItemCount(PER_PAGE_MEMBER);
   }, [searchMembers]);
@@ -124,14 +127,14 @@ function RoomMembers({ roomId }) {
   const mList = searchMembers ? searchMembers.data : members.slice(0, itemCount);
   return (
     <div className="room-members">
-      <MenuHeader>Search member</MenuHeader>
+      <MenuHeader>{t('Molecules.RoomMembers.search_title')}</MenuHeader>
       <Input
         onChange={handleSearch}
-        placeholder="Search for name"
+        placeholder={t('Molecules.RoomMembers.search_placeholder')}
         autoFocus
       />
       <div className="room-members__header">
-        <MenuHeader>{`${searchMembers ? `Found — ${mList.length}` : members.length} members`}</MenuHeader>
+        <MenuHeader>{t('Molecules.RoomMembers.found_members', { count: mList.length })}</MenuHeader>
         <SegmentedControls
           selected={
             (() => {
@@ -139,7 +142,7 @@ function RoomMembers({ roomId }) {
               return getSegmentIndex[membership];
             })()
           }
-          segments={[{ text: 'Joined' }, { text: 'Invited' }, { text: 'Banned' }]}
+          segments={[{ text: t('Molecules.RoomMembers.joined') }, { text: t('Molecules.RoomMembers.invited') }, { text: t('Molecules.RoomMembers.banned') }]}
           onSelect={(index) => {
             const memberships = ['join', 'invite', 'ban'];
             setMembership(memberships[index]);
@@ -162,7 +165,7 @@ function RoomMembers({ roomId }) {
           && (
             <div className="room-members__status">
               <Text variant="b2">
-                {searchMembers ? `No results found for "${searchMembers.term}"` : 'No members to display'}
+                {searchMembers ? t('Molecules.RoomMembers.no_results', { term: searchMembers.term }) : t('Molecules.RoomMembers.no_members')}
               </Text>
             </div>
           )
@@ -171,7 +174,7 @@ function RoomMembers({ roomId }) {
           mList.length !== 0
           && members.length > itemCount
           && searchMembers === null
-          && <Button onClick={loadMorePeople}>View more</Button>
+          && <Button onClick={loadMorePeople}>{t('Molecules.RoomMembers.view_more')}</Button>
         }
       </div>
     </div>

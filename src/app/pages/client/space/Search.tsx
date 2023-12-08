@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import { Box, Icon, Icons, Text, Scroll } from 'folds';
 import { useAtomValue } from 'jotai';
+import { useTranslation } from 'react-i18next';
 import { Page, PageContent, PageContentCenter, PageHeader } from '../../../components/page';
 import { MessageSearch } from '../../../features/message-search';
 import { useSpace } from '../../../hooks/useSpace';
@@ -22,14 +23,14 @@ export function SpaceSearch() {
     space.roomId,
     useRecursiveChildRoomScopeFactory(mx, mDirects, roomToParents)
   );
-
+  const { t } = useTranslation();
   return (
     <Page>
       <PageHeader>
         <Box grow="Yes" justifyContent="Center" alignItems="Center" gap="200">
           <Icon size="400" src={Icons.Search} />
           <Text size="H3" truncate>
-            Message Search
+            {t('Molecules.RoomSearch.subtitle')}
           </Text>
         </Box>
       </PageHeader>

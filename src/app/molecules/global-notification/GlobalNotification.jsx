@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import initMatrix from '../../../client/initMatrix';
 import { openReusableContextMenu } from '../../../client/action/navigation';
@@ -21,9 +22,9 @@ export const notifType = {
   NOISY: 'noisy',
 };
 export const typeToLabel = {
-  [notifType.ON]: 'On',
-  [notifType.OFF]: 'Off',
-  [notifType.NOISY]: 'Noisy',
+  [notifType.ON]: 'Organisms.Settings.notifType.on',
+  [notifType.OFF]: 'Organisms.Settings.notifType.off',
+  [notifType.NOISY]: 'Organisms.Settings.notifType.noisy',
 };
 Object.freeze(notifType);
 
@@ -127,45 +128,46 @@ function GlobalNotification() {
       ),
     );
   };
+  const { t } = useTranslation();
 
   return (
     <div className="global-notification">
-      <MenuHeader>Global Notifications</MenuHeader>
+      <MenuHeader>{t('Organisms.Settings.global_notification.title')}</MenuHeader>
       <SettingTile
-        title="Direct messages"
+        title={t('Organisms.Settings.global_notification.direct_messages.title')}
         options={(
           <Button onClick={(evt) => onSelect(evt, DM)} iconSrc={ChevronBottomIC}>
-            { typeToLabel[rulesToType[DM]] }
+            {t(typeToLabel[rulesToType[DM]])}
           </Button>
         )}
-        content={<Text variant="b3">Default notification settings for all direct message.</Text>}
+        content={<Text variant="b3">{t('Organisms.Settings.global_notification.direct_messages.description')}</Text>}
       />
       <SettingTile
-        title="Encrypted direct messages"
+        title={t('Organisms.Settings.global_notification.encrypted_direct_messages.title')}
         options={(
           <Button onClick={(evt) => onSelect(evt, ENC_DM)} iconSrc={ChevronBottomIC}>
-            {typeToLabel[rulesToType[ENC_DM]]}
+            {t(typeToLabel[rulesToType[ENC_DM]])}
           </Button>
         )}
-        content={<Text variant="b3">Default notification settings for all encrypted direct message.</Text>}
+        content={<Text variant="b3">{t('Organisms.Settings.global_notification.encrypted_direct_messages.description')}</Text>}
       />
       <SettingTile
-        title="Rooms messages"
+        title={t('Organisms.Settings.global_notification.room_messages.title')}
         options={(
           <Button onClick={(evt) => onSelect(evt, ROOM)} iconSrc={ChevronBottomIC}>
-            {typeToLabel[rulesToType[ROOM]]}
+            {t(typeToLabel[rulesToType[ROOM]])}
           </Button>
         )}
-        content={<Text variant="b3">Default notification settings for all room message.</Text>}
+        content={<Text variant="b3">{t('Organisms.Settings.global_notification.room_messages.description')}</Text>}
       />
       <SettingTile
-        title="Encrypted rooms messages"
+        title={t('Organisms.Settings.global_notification.encrypted_room_messages.title')}
         options={(
           <Button onClick={(evt) => onSelect(evt, ENC_ROOM)} iconSrc={ChevronBottomIC}>
-            {typeToLabel[rulesToType[ENC_ROOM]]}
+            {t(typeToLabel[rulesToType[ENC_ROOM]])}
           </Button>
         )}
-        content={<Text variant="b3">Default notification settings for all encrypted room message.</Text>}
+        content={<Text variant="b3">{t('Organisms.Settings.global_notification.encrypted_room_messages.description')}</Text>}
       />
     </div>
   );
