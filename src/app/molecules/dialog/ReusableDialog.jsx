@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import cons from '../../../client/state/cons';
 
@@ -31,6 +32,7 @@ function ReusableDialog() {
   const handleRequestClose = () => {
     setIsOpen(false);
   };
+  const { t } = useTranslation();
 
   return (
     <Dialog
@@ -38,7 +40,7 @@ function ReusableDialog() {
       title={data?.title || ''}
       onAfterClose={handleAfterClose}
       onRequestClose={handleRequestClose}
-      contentOptions={<IconButton src={CrossIC} onClick={handleRequestClose} tooltip="Close" />}
+      contentOptions={<IconButton src={CrossIC} onClick={handleRequestClose} tooltip={t('common.close')} />}
       invisibleScroll
     >
       {data?.render(handleRequestClose) || <div />}

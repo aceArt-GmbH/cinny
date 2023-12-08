@@ -1,5 +1,6 @@
 import React from 'react';
 import './IgnoreUserList.scss';
+import { useTranslation } from 'react-i18next';
 
 import initMatrix from '../../../client/initMatrix';
 import * as roomActions from '../../../client/action/room';
@@ -28,18 +29,19 @@ function IgnoreUserList() {
     ignoreInput.value = '';
     roomActions.ignore(userIds);
   };
+  const { t } = useTranslation();
 
   return (
     <div className="ignore-user-list">
-      <MenuHeader>Ignored users</MenuHeader>
+      <MenuHeader>{t('Organisms.Settings.ignored_users.headline')}</MenuHeader>
       <SettingTile
-        title="Ignore user"
+        title={t('Organisms.Settings.ignored_users.title')}
         content={(
           <div className="ignore-user-list__users">
-            <Text variant="b3">Ignore userId if you do not want to receive their messages or invites.</Text>
+            <Text variant="b3">{t('Organisms.Settings.ignored_users.description')}</Text>
             <form onSubmit={handleSubmit}>
               <Input name="ignoreInput" required />
-              <Button variant="primary" type="submit">Ignore</Button>
+              <Button variant="primary" type="submit">{t('Organisms.Settings.ignored_users.ignore')}</Button>
             </form>
             {ignoredUsers.length > 0 && (
               <div>

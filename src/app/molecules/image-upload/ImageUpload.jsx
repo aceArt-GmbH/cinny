@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import './ImageUpload.scss';
+import { useTranslation } from 'react-i18next';
 
 import initMatrix from '../../../client/initMatrix';
 
@@ -39,6 +40,7 @@ function ImageUpload({
     setUploadPromise(null);
     uploadImageRef.current.value = null;
   }
+  const { t } = useTranslation();
 
   return (
     <div className="img-upload__wrapper">
@@ -71,7 +73,7 @@ function ImageUpload({
           type="button"
           onClick={uploadPromise === null ? onRequestRemove : cancelUpload}
         >
-          <Text variant="b3">{uploadPromise ? 'Cancel' : 'Remove'}</Text>
+          <Text variant="b3">{t(uploadPromise ? 'common.cancel' : 'common.remove')}</Text>
         </button>
       )}
       <input onChange={uploadImage} style={{ display: 'none' }} ref={uploadImageRef} type="file" accept="image/*" />

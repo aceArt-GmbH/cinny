@@ -31,6 +31,7 @@ import React, {
   useCallback,
   useState,
 } from 'react';
+import { useTranslation } from 'react-i18next';
 import FocusTrap from 'focus-trap-react';
 import { useHover, useFocusWithin } from 'react-aria';
 import { MatrixEvent, Room } from 'matrix-js-sdk';
@@ -180,6 +181,7 @@ export const MessageReadReceiptItem = as<
     setOpen(false);
     onClose?.();
   };
+  const { t } = useTranslation();
 
   return (
     <>
@@ -208,7 +210,7 @@ export const MessageReadReceiptItem = as<
         aria-pressed={open}
       >
         <Text className={css.MessageMenuItemText} as="span" size="T300" truncate>
-          Read Receipts
+          {t('Molecules.Message.read_receipts')}
         </Text>
       </MenuItem>
     </>
@@ -257,6 +259,7 @@ export const MessageSourceCodeItem = as<
     setOpen(false);
     onClose?.();
   };
+  const { t } = useTranslation();
 
   return (
     <>
@@ -290,7 +293,7 @@ export const MessageSourceCodeItem = as<
         aria-pressed={open}
       >
         <Text className={css.MessageMenuItemText} as="span" size="T300" truncate>
-          View Source
+        {t('Molecules.Message.view_source')}
         </Text>
       </MenuItem>
     </>
@@ -335,6 +338,7 @@ export const MessageDeleteItem = as<
     setOpen(false);
     onClose?.();
   };
+  const { t } = useTranslation();
 
   return (
     <>
@@ -357,7 +361,7 @@ export const MessageDeleteItem = as<
                 size="500"
               >
                 <Box grow="Yes">
-                  <Text size="H4">Delete Message</Text>
+                  <Text size="H4">{t('Molecules.Message.delete_message')}</Text>
                 </Box>
                 <IconButton size="300" onClick={handleClose} radii="300">
                   <Icon src={Icons.Cross} />
@@ -398,7 +402,7 @@ export const MessageDeleteItem = as<
                   aria-disabled={deleteState.status === AsyncStatus.Loading}
                 >
                   <Text size="B400">
-                    {deleteState.status === AsyncStatus.Loading ? 'Deleting...' : 'Delete'}
+                    {t(deleteState.status === AsyncStatus.Loading ? 'common.deleting' : 'common.delete')}
                   </Text>
                 </Button>
               </Box>
@@ -418,7 +422,7 @@ export const MessageDeleteItem = as<
         ref={ref}
       >
         <Text className={css.MessageMenuItemText} as="span" size="T300" truncate>
-          Delete
+          {t('common.delete')}
         </Text>
       </Button>
     </>
@@ -464,6 +468,7 @@ export const MessageReportItem = as<
     setOpen(false);
     onClose?.();
   };
+  const { t } = useTranslation();
 
   return (
     <>
@@ -486,7 +491,7 @@ export const MessageReportItem = as<
                 size="500"
               >
                 <Box grow="Yes">
-                  <Text size="H4">Report Message</Text>
+                  <Text size="H4">{t('Molecules.Message.report_message')}</Text>
                 </Box>
                 <IconButton size="300" onClick={handleClose} radii="300">
                   <Icon src={Icons.Cross} />
@@ -551,7 +556,7 @@ export const MessageReportItem = as<
         ref={ref}
       >
         <Text className={css.MessageMenuItemText} as="span" size="T300" truncate>
-          Report
+          {t('Molecules.Message.report')}
         </Text>
       </Button>
     </>
@@ -712,6 +717,7 @@ export const Message = as<'div', MessageProps>(
     const closeMenu = () => {
       setMenu(false);
     };
+    const { t } = useTranslation();
 
     return (
       <MessageBase
@@ -831,7 +837,7 @@ export const Message = as<'div', MessageProps>(
                                 size="T300"
                                 truncate
                               >
-                                Add Reaction
+                                {t('Molecules.Message.add_reaction')}
                               </Text>
                             </MenuItem>
                           )}
@@ -858,7 +864,7 @@ export const Message = as<'div', MessageProps>(
                               size="T300"
                               truncate
                             >
-                              Reply
+                              {t('Molecules.Message.reply')}
                             </Text>
                           </MenuItem>
                           {canEditEvent(mx, mEvent) && onEditId && (
@@ -878,7 +884,7 @@ export const Message = as<'div', MessageProps>(
                                 size="T300"
                                 truncate
                               >
-                                Edit Message
+                                {t('Molecules.Message.edit')}
                               </Text>
                             </MenuItem>
                           )}
