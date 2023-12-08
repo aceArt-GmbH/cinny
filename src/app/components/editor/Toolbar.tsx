@@ -17,6 +17,7 @@ import {
   TooltipProvider,
   toRem,
 } from 'folds';
+import { useTranslation } from 'react-i18next';
 import React, { MouseEventHandler, ReactNode, useState } from 'react';
 import { ReactEditor, useSlate } from 'slate-react';
 import {
@@ -129,6 +130,7 @@ export function HeadingBlockButton() {
     toggleBlock(editor, BlockType.Heading, { level: selectedLevel });
     ReactEditor.focus(editor);
   };
+  const { t } = useTranslation();
 
   const handleMenuOpen: MouseEventHandler<HTMLButtonElement> = (evt) => {
     if (isActive) {
@@ -156,7 +158,7 @@ export function HeadingBlockButton() {
           <Menu style={{ padding: config.space.S100 }}>
             <Box gap="100">
               <TooltipProvider
-                tooltip={<BtnTooltip text="Heading 1" shortCode={`${modKey} + 1`} />}
+                tooltip={<BtnTooltip text={`${t('Components.Toolbar.heading')} 1`} shortCode={`${modKey} + 1`} />}
                 delay={500}
               >
                 {(triggerRef) => (
@@ -171,7 +173,7 @@ export function HeadingBlockButton() {
                 )}
               </TooltipProvider>
               <TooltipProvider
-                tooltip={<BtnTooltip text="Heading 2" shortCode={`${modKey} + 2`} />}
+                tooltip={<BtnTooltip text={`${t('Components.Toolbar.heading')} 2`} shortCode={`${modKey} + 2`} />}
                 delay={500}
               >
                 {(triggerRef) => (
@@ -186,7 +188,7 @@ export function HeadingBlockButton() {
                 )}
               </TooltipProvider>
               <TooltipProvider
-                tooltip={<BtnTooltip text="Heading 3" shortCode={`${modKey} + 3`} />}
+                tooltip={<BtnTooltip text={`${t('Components.Toolbar.heading')} 3`} shortCode={`${modKey} + 3`} />}
                 delay={500}
               >
                 {(triggerRef) => (
@@ -257,6 +259,7 @@ export function Toolbar() {
 
   const canEscape = isAnyMarkActive(editor) || !isBlockActive(editor, BlockType.Paragraph);
   const [isMarkdown, setIsMarkdown] = useSetting(settingsAtom, 'isMarkdown');
+  const { t } = useTranslation();
 
   return (
     <Box className={css.EditorToolbarBase}>
@@ -267,32 +270,32 @@ export function Toolbar() {
               <MarkButton
                 format={MarkType.Bold}
                 icon={Icons.Bold}
-                tooltip={<BtnTooltip text="Bold" shortCode={`${modKey} + B`} />}
+                tooltip={<BtnTooltip text={t('Components.Toolbar.bold')} shortCode={`${modKey} + B`} />}
               />
               <MarkButton
                 format={MarkType.Italic}
                 icon={Icons.Italic}
-                tooltip={<BtnTooltip text="Italic" shortCode={`${modKey} + I`} />}
+                tooltip={<BtnTooltip text={t('Components.Toolbar.italic')} shortCode={`${modKey} + I`} />}
               />
               <MarkButton
                 format={MarkType.Underline}
                 icon={Icons.Underline}
-                tooltip={<BtnTooltip text="Underline" shortCode={`${modKey} + U`} />}
+                tooltip={<BtnTooltip text={t('Components.Toolbar.underline')} shortCode={`${modKey} + U`} />}
               />
               <MarkButton
                 format={MarkType.StrikeThrough}
                 icon={Icons.Strike}
-                tooltip={<BtnTooltip text="Strike Through" shortCode={`${modKey} + S`} />}
+                tooltip={<BtnTooltip text={t('Components.Toolbar.strike_through')} shortCode={`${modKey} + S`} />}
               />
               <MarkButton
                 format={MarkType.Code}
                 icon={Icons.Code}
-                tooltip={<BtnTooltip text="Inline Code" shortCode={`${modKey} + [`} />}
+                tooltip={<BtnTooltip text={t('Components.Toolbar.inline_code')} shortCode={`${modKey} + [`} />}
               />
               <MarkButton
                 format={MarkType.Spoiler}
                 icon={Icons.EyeBlind}
-                tooltip={<BtnTooltip text="Spoiler" shortCode={`${modKey} + H`} />}
+                tooltip={<BtnTooltip text={t('Components.Toolbar.spoiler')} shortCode={`${modKey} + H`} />}
               />
             </Box>
             <Line variant="SurfaceVariant" direction="Vertical" style={{ height: toRem(12) }} />
@@ -301,22 +304,22 @@ export function Toolbar() {
             <BlockButton
               format={BlockType.BlockQuote}
               icon={Icons.BlockQuote}
-              tooltip={<BtnTooltip text="Block Quote" shortCode={`${modKey} + '`} />}
+              tooltip={<BtnTooltip text={t('Components.Toolbar.block_quote')} shortCode={`${modKey} + '`} />}
             />
             <BlockButton
               format={BlockType.CodeBlock}
               icon={Icons.BlockCode}
-              tooltip={<BtnTooltip text="Block Code" shortCode={`${modKey} + ;`} />}
+              tooltip={<BtnTooltip text={t('Components.Toolbar.block_code')} shortCode={`${modKey} + ;`} />}
             />
             <BlockButton
               format={BlockType.OrderedList}
               icon={Icons.OrderList}
-              tooltip={<BtnTooltip text="Ordered List" shortCode={`${modKey} + 7`} />}
+              tooltip={<BtnTooltip text={t('Components.Toolbar.ordered_list')} shortCode={`${modKey} + 7`} />}
             />
             <BlockButton
               format={BlockType.UnorderedList}
               icon={Icons.UnorderList}
-              tooltip={<BtnTooltip text="Unordered List" shortCode={`${modKey} + 8`} />}
+              tooltip={<BtnTooltip text={t('Components.Toolbar.unordered_list')} shortCode={`${modKey} + 8`} />}
             />
             <HeadingBlockButton />
           </Box>
@@ -326,7 +329,7 @@ export function Toolbar() {
               <Box shrink="No" gap="100">
                 <ExitFormatting
                   tooltip={
-                    <BtnTooltip text="Exit Formatting" shortCode={`Escape, ${modKey} + E`} />
+                    <BtnTooltip text={t('Components.Toolbar.exit_formatting')} shortCode={`Escape, ${modKey} + E`} />
                   }
                 />
               </Box>
@@ -335,7 +338,7 @@ export function Toolbar() {
           <Box className={css.MarkdownBtnBox} shrink="No" grow="Yes" justifyContent="End">
             <TooltipProvider
               align="End"
-              tooltip={<BtnTooltip text="Toggle Markdown" />}
+              tooltip={<BtnTooltip text={t('Components.Toolbar.toggle_markdown')} />}
               delay={500}
             >
               {(triggerRef) => (

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Text } from 'folds';
 import { UserEvent, UserEventHandlerMap } from 'matrix-js-sdk';
+import { useTranslation } from 'react-i18next';
 import { SidebarItem, SidebarItemTooltip, SidebarAvatar } from '../../../components/sidebar';
 import { openSettings } from '../../../../client/action/navigation';
 import { UserAvatar } from '../../../components/user-avatar';
@@ -44,10 +45,11 @@ export function UserTab() {
       user?.removeListener(UserEvent.DisplayName, onDisplayNameChange);
     };
   }, [mx, userId]);
+  const { t } = useTranslation();
 
   return (
     <SidebarItem>
-      <SidebarItemTooltip tooltip="User Settings">
+      <SidebarItemTooltip tooltip={t("user_settings")}>
         {(triggerRef) => (
           <SidebarAvatar as="button" ref={triggerRef} onClick={() => openSettings()}>
             <UserAvatar

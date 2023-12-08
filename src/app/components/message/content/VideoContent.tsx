@@ -14,6 +14,7 @@ import {
 import classNames from 'classnames';
 import { BlurhashCanvas } from 'react-blurhash';
 import { EncryptedAttachmentInfo } from 'browser-encrypt-attachment';
+import { useTranslation } from 'react-i18next';
 import {
   IThumbnailContent,
   IVideoInfo,
@@ -90,6 +91,8 @@ export const VideoContent = as<'div', VideoContentProps>(
       if (autoPlay) loadSrc();
     }, [autoPlay, loadSrc]);
 
+    const { t } = useTranslation();
+
     return (
       <Box className={classNames(css.RelativeBase, className)} {...props} ref={ref}>
         {typeof blurHash === 'string' && !load && (
@@ -116,7 +119,7 @@ export const VideoContent = as<'div', VideoContentProps>(
               onClick={loadSrc}
               before={<Icon size="Inherit" src={Icons.Play} filled />}
             >
-              <Text size="B300">Watch</Text>
+              <Text size="B300">{t('Components.Files.watch')}</Text>
             </Button>
           </Box>
         )}

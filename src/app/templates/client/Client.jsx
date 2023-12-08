@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import './Client.scss';
+import { useTranslation } from 'react-i18next';
 
 import ReusableContextMenu from '../../atoms/context-menu/ReusableContextMenu';
 import Windows from '../../organisms/pw/Windows';
@@ -26,6 +27,8 @@ function SystemEmojiFeature() {
 
 function Client() {
   const classNameHidden = 'client__item-hidden';
+
+  const { t } = useTranslation();
 
   const navWrapperRef = useRef(null);
   const roomWrapperRef = useRef(null);

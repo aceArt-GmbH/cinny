@@ -7,6 +7,7 @@ import React, {
   useState,
 } from 'react';
 import { useAtom, useAtomValue } from 'jotai';
+import { useTranslation } from 'react-i18next';
 import {
   Avatar,
   Box,
@@ -321,7 +322,7 @@ export function Space() {
 
   const getToLink = (roomId: string) =>
     getSpaceRoomPath(spaceIdOrAlias, getCanonicalAliasOrRoomId(mx, roomId));
-
+  const { t } = useTranslation();
   return (
     <PageNav>
       <SpaceHeader />
@@ -353,7 +354,7 @@ export function Space() {
                     </Avatar>
                     <Box as="span" grow="Yes">
                       <Text as="span" size="Inherit" truncate>
-                        Message Search
+                        {t('Molecules.RoomSearch.subtitle')}
                       </Text>
                     </Box>
                   </Box>

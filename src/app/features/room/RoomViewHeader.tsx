@@ -23,7 +23,7 @@ import {
 import { useLocation, useNavigate } from 'react-router-dom';
 import { JoinRule, Room } from 'matrix-js-sdk';
 import { useAtomValue } from 'jotai';
-
+import { useTranslation } from 'react-i18next';
 import { useStateEvent } from '../../hooks/useStateEvent';
 import { PageHeader } from '../../components/page';
 import { RoomAvatar, RoomIcon } from '../../components/room-avatar';
@@ -92,6 +92,8 @@ const RoomMenu = forwardRef<HTMLDivElement, RoomMenuProps>(
       requestClose();
     };
 
+    const { t } = useTranslation();
+
     return (
       <Menu ref={ref} style={{ maxWidth: toRem(160), width: '100vw' }}>
         <Box direction="Column" gap="100" style={{ padding: config.space.S100 }}>
@@ -103,7 +105,7 @@ const RoomMenu = forwardRef<HTMLDivElement, RoomMenuProps>(
             disabled={!unread}
           >
             <Text style={{ flexGrow: 1 }} as="span" size="T300" truncate>
-              Mark as Read
+              {t('Organisms.RoomCommon.mark_as_read')}
             </Text>
           </MenuItem>
         </Box>
@@ -119,7 +121,7 @@ const RoomMenu = forwardRef<HTMLDivElement, RoomMenuProps>(
             disabled={!canInvite}
           >
             <Text style={{ flexGrow: 1 }} as="span" size="T300" truncate>
-              Invite
+              {t('Organisms.RoomSettings.invite')}
             </Text>
           </MenuItem>
           <MenuItem
@@ -129,7 +131,7 @@ const RoomMenu = forwardRef<HTMLDivElement, RoomMenuProps>(
             radii="300"
           >
             <Text style={{ flexGrow: 1 }} as="span" size="T300" truncate>
-              Copy Link
+              {t('Organisms.RoomSettings.copyLink')}
             </Text>
           </MenuItem>
           <MenuItem
@@ -139,7 +141,7 @@ const RoomMenu = forwardRef<HTMLDivElement, RoomMenuProps>(
             radii="300"
           >
             <Text style={{ flexGrow: 1 }} as="span" size="T300" truncate>
-              Room Settings
+              {t('Organisms.RoomSettings.options')}
             </Text>
           </MenuItem>
         </Box>
@@ -158,7 +160,7 @@ const RoomMenu = forwardRef<HTMLDivElement, RoomMenuProps>(
                   aria-pressed={promptLeave}
                 >
                   <Text style={{ flexGrow: 1 }} as="span" size="T300" truncate>
-                    Leave Room
+                    {t('Organisms.RoomSettings.leave')}
                   </Text>
                 </MenuItem>
                 {promptLeave && (

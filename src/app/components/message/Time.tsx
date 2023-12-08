@@ -1,6 +1,8 @@
 import React, { ComponentProps } from 'react';
 import { Text, as } from 'folds';
-import { timeDayMonYear, timeHourMinute, today, yesterday } from '../../utils/time';
+import { useTranslation } from 'react-i18next';
+import dayjs from 'dayjs';
+import { timeDayMonYear, today, yesterday } from '../../utils/time';
 
 export type TimeProps = {
   compact?: boolean;
@@ -9,15 +11,18 @@ export type TimeProps = {
 
 export const Time = as<'span', TimeProps & ComponentProps<typeof Text>>(
   ({ compact, ts, ...props }, ref) => {
+    const { t } = useTranslation();
+    const timeHourMinute = dayjs(ts).format(t('Time.timeHourMinute'));
+
     let time = '';
     if (compact) {
-      time = timeHourMinute(ts);
+      time = timeHourMinute;
     } else if (today(ts)) {
-      time = timeHourMinute(ts);
+      time = timeHourMinute;
     } else if (yesterday(ts)) {
-      time = `Yesterday ${timeHourMinute(ts)}`;
+      time = `${t('Time.yesterday')} ${timeHourMinute}`;
     } else {
-      time = `${timeDayMonYear(ts)} ${timeHourMinute(ts)}`;
+      time = `${timeDayMonYear(ts)} ${timeHourMinute}`;
     }
 
     return (

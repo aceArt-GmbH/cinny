@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './ImportE2ERoomKeys.scss';
+import { useTranslation } from 'react-i18next';
 
 import initMatrix from '../../../client/initMatrix';
 import cons from '../../../client/state/cons';
@@ -102,6 +103,7 @@ function ImportE2ERoomKeys() {
       isMountStore.setItem(false);
     };
   }, []);
+  const { t } = useTranslation();
 
   return (
     <div className="import-e2e-room-keys">
@@ -114,9 +116,9 @@ function ImportE2ERoomKeys() {
             <Text>{keyFile.name}</Text>
           </div>
         )}
-        {keyFile === null && <Button onClick={() => inputRef.current.click()}>Import keys</Button>}
-        <Input forwardRef={passwordRef} type="password" placeholder="Password" required />
-        <Button disabled={status.isOngoing} variant="primary" type="submit">Decrypt</Button>
+        {keyFile === null && <Button onClick={() => inputRef.current.click()}>{t('Organisms.Settings.security.import_encryption_keys.import')}</Button>}
+        <Input forwardRef={passwordRef} type="password" placeholder={t('Organisms.Settings.security.import_encryption_keys.password')} required />
+        <Button disabled={status.isOngoing} variant="primary" type="submit">{t('Organisms.Settings.security.import_encryption_keys.decrypt')}</Button>
       </form>
       { status.type === cons.status.IN_FLIGHT && (
         <div className="import-e2e-room-keys__process">

@@ -52,9 +52,9 @@ export async function isRoomAliasAvailable(alias) {
 
 export function getPowerLabel(powerLevel) {
   if (powerLevel > 9000) return 'Goku';
-  if (powerLevel > 100) return 'Founder';
-  if (powerLevel === 100) return 'Admin';
-  if (powerLevel >= 50) return 'Mod';
+  if (powerLevel > 100) return 'Molecules.PowerLevelSelector.founder';
+  if (powerLevel === 100) return 'Molecules.PowerLevelSelector.admin';
+  if (powerLevel >= 50) return 'Molecules.PowerLevelSelector.mod';
   return null;
 }
 

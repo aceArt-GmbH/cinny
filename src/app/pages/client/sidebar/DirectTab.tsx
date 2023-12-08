@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Box, Icon, Icons, Menu, MenuItem, PopOut, RectCords, Text, config, toRem } from 'folds';
 import FocusTrap from 'focus-trap-react';
 import { useAtomValue } from 'jotai';
+import { useTranslation } from 'react-i18next';
 import { useDirects } from '../../../state/hooks/roomList';
 import { useMatrixClient } from '../../../hooks/useMatrixClient';
 import { mDirectAtom } from '../../../state/mDirectList';
@@ -35,6 +36,7 @@ const DirectMenu = forwardRef<HTMLDivElement, DirectMenuProps>(({ requestClose }
     orphanRooms.forEach((rId) => markAsRead(rId));
     requestClose();
   };
+  const { t } = useTranslation();
 
   return (
     <Menu ref={ref} style={{ maxWidth: toRem(160), width: '100vw' }}>
@@ -47,7 +49,7 @@ const DirectMenu = forwardRef<HTMLDivElement, DirectMenuProps>(({ requestClose }
           aria-disabled={!unread}
         >
           <Text style={{ flexGrow: 1 }} as="span" size="T300" truncate>
-            Mark as Read
+            {t('Organisms.RoomCommon.mark_as_read')}
           </Text>
         </MenuItem>
       </Box>
@@ -86,9 +88,11 @@ export function DirectTab() {
       return cords;
     });
   };
+  const { t } = useTranslation();
+
   return (
     <SidebarItem active={directSelected}>
-      <SidebarItemTooltip tooltip="Direct Messages">
+      <SidebarItemTooltip tooltip={t('Organisms.InviteList.direct_messages_title')}>
         {(triggerRef) => (
           <SidebarAvatar
             as="button"

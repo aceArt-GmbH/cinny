@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import { Icon, Icons, Scroll } from 'folds';
-
+import { useTranslation } from 'react-i18next';
 import {
   Sidebar,
   SidebarContent,
@@ -15,7 +15,7 @@ import { openCreateRoom, openSearch } from '../../../client/action/navigation';
 
 export function SidebarNav() {
   const scrollRef = useRef<HTMLDivElement>(null);
-
+  const { t } = useTranslation();
   return (
     <Sidebar>
       <SidebarContent
@@ -34,7 +34,7 @@ export function SidebarNav() {
             <SidebarStackSeparator />
             <SidebarStack>
               <SidebarItem>
-                <SidebarItemTooltip tooltip="Search">
+                <SidebarItemTooltip tooltip={t('Molecules.RoomSearch.search_button')}>
                   {(triggerRef) => (
                     <SidebarAvatar
                       as="button"

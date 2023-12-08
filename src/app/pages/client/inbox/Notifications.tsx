@@ -24,6 +24,7 @@ import {
 } from 'matrix-js-sdk';
 import { useVirtualizer } from '@tanstack/react-virtual';
 import { HTMLReactParserOptions } from 'html-react-parser';
+import { useTranslation } from 'react-i18next';
 import { Page, PageContent, PageContentCenter, PageHeader } from '../../../components/page';
 import { useMatrixClient } from '../../../hooks/useMatrixClient';
 import { getMxIdLocalPart, isRoomId, isUserId } from '../../../utils/matrix';
@@ -278,7 +279,7 @@ function RoomNotificationsGroupComp({
   const handleMarkAsRead = () => {
     markAsRead(room.roomId);
   };
-
+  const { t } = useTranslation();
   return (
     <Box direction="Column" gap="200">
       <Header size="300">
@@ -305,7 +306,7 @@ function RoomNotificationsGroupComp({
               onClick={handleMarkAsRead}
               before={<Icon size="100" src={Icons.CheckTwice} />}
             >
-              <Text size="T200">Mark as Read</Text>
+              <Text size="T200">{t('Organisms.RoomCommon.mark_as_read')}</Text>
             </Chip>
           )}
         </Box>

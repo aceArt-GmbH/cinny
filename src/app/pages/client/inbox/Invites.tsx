@@ -17,6 +17,7 @@ import {
 import { useAtomValue } from 'jotai';
 import FocusTrap from 'focus-trap-react';
 import { MatrixError, Room } from 'matrix-js-sdk';
+import { useTranslation } from 'react-i18next';
 import { Page, PageContent, PageContentCenter, PageHeader } from '../../../components/page';
 import { useDirectInvites, useRoomInvites, useSpaceInvites } from '../../../state/hooks/inviteList';
 import { useMatrixClient } from '../../../hooks/useMatrixClient';
@@ -221,6 +222,7 @@ export function Invites() {
       />
     );
   };
+  const { t } = useTranslation();
 
   return (
     <Page>
@@ -239,7 +241,7 @@ export function Invites() {
               <Box ref={containerRef} direction="Column" gap="600">
                 {directInvites.length > 0 && (
                   <Box direction="Column" gap="200">
-                    <Text size="H4">Direct Messages</Text>
+                    <Text size="H4">{t('Organisms.InviteList.direct_messages_title')}</Text>
                     <Box direction="Column" gap="100">
                       {directInvites.map((roomId) => renderInvite(roomId, true, navigateRoom))}
                     </Box>

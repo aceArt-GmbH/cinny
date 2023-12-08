@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { useTranslation } from 'react-i18next';
 
 import initMatrix from '../../../client/initMatrix';
 import cons from '../../../client/state/cons';
@@ -65,6 +66,7 @@ function Home({ spaceId }) {
       notifications.removeListener(cons.events.notifications.MUTE_TOGGLED, notiChanged);
     };
   }, []);
+  const { t } = useTranslation();
 
   return (
     <>
@@ -73,7 +75,7 @@ function Home({ spaceId }) {
       )}
 
       { roomIds.length !== 0 && (
-        <RoomsCategory name="Rooms" roomIds={roomIds.sort(roomIdByAtoZ)} drawerPostie={drawerPostie} />
+        <RoomsCategory name={t('Organisms.Navigation.rooms')} roomIds={roomIds.sort(roomIdByAtoZ)} drawerPostie={drawerPostie} />
       )}
 
       { directIds.length !== 0 && (

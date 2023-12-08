@@ -28,6 +28,7 @@ import {
   TooltipProvider,
   config,
 } from 'folds';
+import { useTranslation } from 'react-i18next';
 import { Room, RoomMember } from 'matrix-js-sdk';
 import { useVirtualizer } from '@tanstack/react-virtual';
 import FocusTrap from 'focus-trap-react';
@@ -80,27 +81,27 @@ const useMembershipFilterMenu = (): MembershipFilter[] =>
   useMemo(
     () => [
       {
-        name: 'Joined',
+        name: 'Organisms.MembersDrawer.Filter.joined',
         filterFn: MembershipFilters.filterJoined,
         color: 'Background',
       },
       {
-        name: 'Invited',
+        name: 'Organisms.MembersDrawer.Filter.invited',
         filterFn: MembershipFilters.filterInvited,
         color: 'Success',
       },
       {
-        name: 'Left',
+        name: 'Organisms.MembersDrawer.Filter.left',
         filterFn: MembershipFilters.filterLeaved,
         color: 'Secondary',
       },
       {
-        name: 'Kicked',
+        name: 'Organisms.MembersDrawer.Filter.kicked',
         filterFn: MembershipFilters.filterKicked,
         color: 'Warning',
       },
       {
-        name: 'Banned',
+        name: 'Organisms.MembersDrawer.Filter.banned',
         filterFn: MembershipFilters.filterBanned,
         color: 'Critical',
       },
@@ -130,19 +131,19 @@ const useSortFilterMenu = (): SortFilter[] =>
   useMemo(
     () => [
       {
-        name: 'A to Z',
+        name: 'Organisms.MembersDrawer.Sort.aToZ',
         filterFn: SortFilters.filterAscending,
       },
       {
-        name: 'Z to A',
+        name: 'Organisms.MembersDrawer.Sort.tToA',
         filterFn: SortFilters.filterDescending,
       },
       {
-        name: 'Newest',
+        name: 'Organisms.MembersDrawer.Sort.newest',
         filterFn: SortFilters.filterNewestFirst,
       },
       {
-        name: 'Oldest',
+        name: 'Organisms.MembersDrawer.Sort.oldest',
         filterFn: SortFilters.filterOldest,
       },
     ],
@@ -246,14 +247,15 @@ export function MembersDrawer({ room }: MembersDrawerProps) {
     const userId = btn.getAttribute('data-user-id');
     openProfileViewer(userId, room.roomId);
   };
+  const { t } = useTranslation();
 
   return (
     <Box className={css.MembersDrawer} shrink="No" direction="Column">
       <Header className={css.MembersDrawerHeader} variant="Background" size="600">
         <Box grow="Yes" alignItems="Center" gap="200">
           <Box grow="Yes" alignItems="Center" gap="200">
-            <Text title={`${room.getJoinedMemberCount()} Members`} size="H5" truncate>
-              {`${millify(room.getJoinedMemberCount())} Members`}
+            <Text title={`${room.getJoinedMemberCount()} ${t('Organisms.MembersDrawer.members')}`} size="H5" truncate>
+              {`${millify(room.getJoinedMemberCount())} ${t('Organisms.MembersDrawer.members')}`}
             </Text>
           </Box>
           <Box shrink="No" alignItems="Center">
@@ -263,7 +265,7 @@ export function MembersDrawer({ room }: MembersDrawerProps) {
               offset={4}
               tooltip={
                 <Tooltip>
-                  <Text>Close</Text>
+                  <Text>{t('common.close')}</Text>
                 </Tooltip>
               }
             >
@@ -319,7 +321,7 @@ export function MembersDrawer({ room }: MembersDrawerProps) {
                                   setAnchor(undefined);
                                 }}
                               >
-                                <Text size="T300">{menuItem.name}</Text>
+                                <Text size="T300">{t(menuItem.name)}</Text>
                               </MenuItem>
                             ))}
                           </Menu>
@@ -338,7 +340,7 @@ export function MembersDrawer({ room }: MembersDrawerProps) {
                         radii="300"
                         before={<Icon src={Icons.Filter} size="50" />}
                       >
-                        <Text size="T200">{membershipFilter.name}</Text>
+                        <Text size="T200">{t(membershipFilter.name)}</Text>
                       </Chip>
                     </PopOut>
                   )}
@@ -373,7 +375,7 @@ export function MembersDrawer({ room }: MembersDrawerProps) {
                                   setAnchor(undefined);
                                 }}
                               >
-                                <Text size="T300">{menuItem.name}</Text>
+                                <Text size="T300">{t(menuItem.name)}</Text>
                               </MenuItem>
                             ))}
                           </Menu>
@@ -392,7 +394,7 @@ export function MembersDrawer({ room }: MembersDrawerProps) {
                         radii="300"
                         after={<Icon src={Icons.Sort} size="50" />}
                       >
-                        <Text size="T200">{sortFilter.name}</Text>
+                        <Text size="T200">{t(sortFilter.name)}</Text>
                       </Chip>
                     </PopOut>
                   )}
@@ -403,7 +405,7 @@ export function MembersDrawer({ room }: MembersDrawerProps) {
                   ref={searchInputRef}
                   onChange={handleSearchChange}
                   style={{ paddingRight: config.space.S200 }}
-                  placeholder="Type name..."
+                  placeholder={t('Organisms.MembersDrawer.type_name')}
                   variant="Surface"
                   size="400"
                   radii="400"
@@ -424,9 +426,7 @@ export function MembersDrawer({ room }: MembersDrawerProps) {
                         }}
                         after={<Icon size="50" src={Icons.Cross} />}
                       >
-                        <Text size="B300">{`${result.items.length || 'No'} ${
-                          result.items.length === 1 ? 'Result' : 'Results'
-                        }`}</Text>
+                        <Text size="B300">{`${result.items.length || t('Organisms.MembersDrawer.no')} ${t('Organisms.MembersDrawer.result', {count: result.items.length})}`}</Text>
                       </Chip>
                     )
                   }
@@ -449,7 +449,7 @@ export function MembersDrawer({ room }: MembersDrawerProps) {
 
             {!fetchingMembers && !result && processMembers.length === 0 && (
               <Text style={{ padding: config.space.S300 }} align="Center">
-                {`No "${membershipFilter.name}" Members`}
+                {t('Organisms.MembersDrawer.Filter.no_members', {membershipFilter: t(membershipFilter.name)})}
               </Text>
             )}
 

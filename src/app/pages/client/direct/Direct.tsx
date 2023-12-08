@@ -17,6 +17,7 @@ import {
 } from 'folds';
 import { useVirtualizer } from '@tanstack/react-virtual';
 import FocusTrap from 'focus-trap-react';
+import { useTranslation } from 'react-i18next';
 import { useMatrixClient } from '../../../hooks/useMatrixClient';
 import { factoryRoomIdByActivity } from '../../../utils/sort';
 import {
@@ -57,6 +58,7 @@ const DirectMenu = forwardRef<HTMLDivElement, DirectMenuProps>(({ requestClose }
     orphanRooms.forEach((rId) => markAsRead(rId));
     requestClose();
   };
+  const { t } = useTranslation();
 
   return (
     <Menu ref={ref} style={{ maxWidth: toRem(160), width: '100vw' }}>
@@ -69,7 +71,7 @@ const DirectMenu = forwardRef<HTMLDivElement, DirectMenuProps>(({ requestClose }
           aria-disabled={!unread}
         >
           <Text style={{ flexGrow: 1 }} as="span" size="T300" truncate>
-            Mark as Read
+            {t('Organisms.RoomCommon.mark_as_read')}
           </Text>
         </MenuItem>
       </Box>
@@ -87,6 +89,7 @@ function DirectHeader() {
       return cords;
     });
   };
+  const { t } = useTranslation();
 
   return (
     <>
@@ -94,7 +97,7 @@ function DirectHeader() {
         <Box alignItems="Center" grow="Yes" gap="300">
           <Box grow="Yes">
             <Text size="H4" truncate>
-              Direct Messages
+              {t('Organisms.InviteList.direct_messages_title')}
             </Text>
           </Box>
           <Box>
@@ -129,24 +132,25 @@ function DirectHeader() {
 }
 
 function DirectEmpty() {
+  const { t } = useTranslation();
   return (
     <NavEmptyCenter>
       <NavEmptyLayout
         icon={<Icon size="600" src={Icons.Mention} />}
         title={
           <Text size="H5" align="Center">
-            No Direct Messages
+            {t('Organisms.Direct.no_direct')}
           </Text>
         }
         content={
           <Text size="T300" align="Center">
-            You do not have any direct messages yet.
+            {t('Organisms.Direct.no_direct_yet')}
           </Text>
         }
         options={
           <Button variant="Secondary" size="300" onClick={() => openInviteUser()}>
             <Text size="B300" truncate>
-              Direct Message
+              {t('Organisms.DrawerHeader.direct_messages')}
             </Text>
           </Button>
         }
@@ -187,7 +191,7 @@ export function Direct() {
   const handleCategoryClick = useCategoryHandler(setClosedCategories, (categoryId) =>
     closedCategories.has(categoryId)
   );
-
+  const { t } = useTranslation();
   return (
     <PageNav>
       <DirectHeader />
@@ -206,7 +210,7 @@ export function Direct() {
                       </Avatar>
                       <Box as="span" grow="Yes">
                         <Text as="span" size="Inherit" truncate>
-                          Create Chat
+                          {t('Organisms.CreateRoom.create_room')}
                         </Text>
                       </Box>
                     </Box>

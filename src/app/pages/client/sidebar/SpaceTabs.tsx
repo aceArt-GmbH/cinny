@@ -26,6 +26,7 @@ import {
 } from 'folds';
 import { useAtom, useAtomValue } from 'jotai';
 import { Room } from 'matrix-js-sdk';
+import { useTranslation } from 'react-i18next';
 import {
   draggable,
   dropTargetForElements,
@@ -137,6 +138,7 @@ const SpaceMenu = forwardRef<HTMLDivElement, SpaceMenuProps>(
       openSpaceSettings(room.roomId);
       requestClose();
     };
+    const { t } = useTranslation();
 
     return (
       <Menu ref={ref} style={{ maxWidth: toRem(160), width: '100vw' }}>
@@ -149,7 +151,7 @@ const SpaceMenu = forwardRef<HTMLDivElement, SpaceMenuProps>(
             disabled={!unread}
           >
             <Text style={{ flexGrow: 1 }} as="span" size="T300" truncate>
-              Mark as Read
+              {t('Organisms.RoomCommon.mark_as_read')}
             </Text>
           </MenuItem>
           {onUnpin && (
