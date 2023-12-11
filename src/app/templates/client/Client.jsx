@@ -22,6 +22,7 @@ import { MatrixClientProvider } from '../../hooks/useMatrixClient';
 import { ClientContent } from './ClientContent';
 import { useSetting } from '../../state/hooks/settings';
 import { settingsAtom } from '../../state/settings';
+import { destructUrlHandling, handleUriFragmentChange } from '../../../util/uriFragments';
 
 function SystemEmojiFeature() {
   const [twitterEmoji] = useSetting(settingsAtom, 'twitterEmoji');
@@ -80,8 +81,13 @@ function Client() {
       initHotkeys();
       initRoomListListener(initMatrix.roomList);
       changeLoading(false);
+      handleUriFragmentChange();
     });
     initMatrix.init();
+
+    return () => {
+      destructUrlHandling();
+    };
   }, []);
 
   if (isLoading) {
