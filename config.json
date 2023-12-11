@@ -1,14 +1,7 @@
 {
-  "defaultHomeserver": 2,
-  "homeserverList": [
-    "converser.eu",
-    "envs.net",
-    "matrix.org",
-    "monero.social",
-    "mozilla.org",
-    "xmr.se"
-  ],
-  "allowCustomHomeservers": true,
+  "defaultHomeserver": 0,
+  "homeserverList": ["chat-edeka-next-stage2.knowhow.de"],
+  "allowCustomHomeservers": false,
 
   "featuredCommunities": {
     "openAsDefault": false,
