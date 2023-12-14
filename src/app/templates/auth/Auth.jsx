@@ -520,14 +520,14 @@ function AuthCard() {
       )}
       { hsConfig !== null && (
         <Text variant="b2" className="auth-card__switch flex--center">
-          {`${(type === 'login' ? 'Don\'t have' : 'Already have')} an account?`}
-          <button
+          {(type === 'login' ? '' : 'Already have an account?')}
+          {(type === 'login' ? '' : <button
             type="button"
             style={{ color: 'var(--tc-link)', cursor: 'pointer', margin: '0 var(--sp-ultra-tight)' }}
             onClick={() => setType((type === 'login') ? 'register' : 'login')}
           >
             { type === 'login' ? ' Register' : ' Login' }
-          </button>
+          </button>)}
         </Text>
       )}
     </>
