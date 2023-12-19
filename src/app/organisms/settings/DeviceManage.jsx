@@ -152,7 +152,6 @@ function DeviceManage() {
   const renderDevice = (device, isVerified) => {
     const deviceId = device.device_id;
     const displayName = device.display_name;
-    const lastIP = device.last_seen_ip;
     const lastTS = device.last_seen_ts;
     const isCurrentDevice = mx.deviceId === deviceId;
     const canVerify = isVerified === false && (isMeVerified || isCurrentDevice);
@@ -186,7 +185,6 @@ function DeviceManage() {
                 <span style={{ color: 'var(--tc-surface-normal)' }}>
                   {dateFormat(new Date(lastTS), ' hh:MM TT, dd/mm/yyyy')}
                 </span>
-                {lastIP ? ` at ${lastIP}` : ''}
               </Text>
             )}
             {isCurrentDevice && (
