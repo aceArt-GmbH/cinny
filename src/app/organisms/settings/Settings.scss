@@ -80,6 +80,10 @@
     & button {
       margin-top: var(--sp-tight);
       @include dir.side(margin, 0, var(--sp-tight));
+
+      > p {
+        white-space: unset !important;
+      }
     }
   }
   

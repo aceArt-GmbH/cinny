@@ -151,7 +151,7 @@ function AppearanceSection() {
               onToggle={() => setEnterForNewline(!enterForNewline) }
             />
           )}
-          content={<Text variant="b3">{`Use ${isMacOS() ? KeySymbol.Command : 'Ctrl'} + ENTER to send message and ENTER for newline.`}</Text>}
+          content={<Text variant="b3">{`Use ${isMacOS() ? KeySymbol.Command : 'Strg'} + ENTER to send message and ENTER for newline.`}</Text>}
         />
         <SettingTile
           title="Markdown formatting"

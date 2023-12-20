@@ -522,7 +522,6 @@ export const MessageReportItem = as<
   };
 
   return (
-    <>
       <Overlay open={open} backdrop={<OverlayBackdrop />}>
         <OverlayCenter>
           <FocusTrap
@@ -595,22 +594,6 @@ export const MessageReportItem = as<
           </FocusTrap>
         </OverlayCenter>
       </Overlay>
-      <Button
-        variant="Critical"
-        fill="None"
-        size="300"
-        after={<Icon size="100" src={Icons.Warning} />}
-        radii="300"
-        onClick={() => setOpen(true)}
-        aria-pressed={open}
-        {...props}
-        ref={ref}
-      >
-        <Text className={css.MessageMenuItemText} as="span" size="T300" truncate>
-          Report
-        </Text>
-      </Button>
-    </>
   );
 });
 

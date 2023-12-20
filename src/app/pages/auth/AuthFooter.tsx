@@ -1,6 +1,7 @@
 import React from 'react';
 import { Box, Text } from 'folds';
 import * as css from './styles.css';
+import cons from '../../../client/state/cons';
 
 export function AuthFooter() {
   return (
@@ -15,7 +16,7 @@ export function AuthFooter() {
         target="_blank"
         rel="noreferrer"
       >
-        v3.2.0
+        {`v${cons.version}`}
       </Text>
       <Text as="a" size="T300" href="https://twitter.com/cinnyapp" target="_blank" rel="noreferrer">
         Twitter

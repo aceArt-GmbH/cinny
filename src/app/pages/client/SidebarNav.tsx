@@ -27,23 +27,6 @@ export function SidebarNav() {
             </SidebarStack>
             <SpaceTabs scrollRef={scrollRef} />
             <SidebarStackSeparator />
-            <SidebarStack>
-              <ExploreTab />
-              <SidebarItem>
-                <SidebarItemTooltip tooltip="Create Space">
-                  {(triggerRef) => (
-                    <SidebarAvatar
-                      as="button"
-                      ref={triggerRef}
-                      outlined
-                      onClick={() => openCreateRoom(true)}
-                    >
-                      <Icon src={Icons.Plus} />
-                    </SidebarAvatar>
-                  )}
-                </SidebarItemTooltip>
-              </SidebarItem>
-            </SidebarStack>
           </Scroll>
         }
         sticky={
