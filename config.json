@@ -1,6 +1,6 @@
 {
   "defaultHomeserver": 0,
-  "homeserverList": ["chat-edeka-next-stage2.knowhow.de"],
+  "homeserverList": ["chat.next.edeka"],
   "allowCustomHomeservers": false,
 
   "featuredCommunities": {
