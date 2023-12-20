@@ -54,14 +54,6 @@ export function HomeSpaceOptions({ spaceId, afterOptionSelect }) {
       </MenuItem>
       { !spaceId && (
         <MenuItem
-          iconSrc={HashGlobeIC}
-          onClick={() => { afterOptionSelect(); openPublicRooms(); }}
-        >
-          Explore public rooms
-        </MenuItem>
-      )}
-      { !spaceId && (
-        <MenuItem
           iconSrc={PlusIC}
           onClick={() => { afterOptionSelect(); openJoinAlias(); }}
         >

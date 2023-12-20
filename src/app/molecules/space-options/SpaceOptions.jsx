@@ -81,7 +81,7 @@ function SpaceOptions({ roomId, afterOptionSelect }) {
   };
 
   return (
-    <div style={{ maxWidth: 'calc(var(--navigation-drawer-width) - var(--sp-normal))' }}>
+    <div style={{ maxWidth: '600px' }}>
       <MenuHeader>{twemojify(`Options for ${initMatrix.matrixClient.getRoom(roomId)?.name}`)}</MenuHeader>
       <MenuItem iconSrc={TickMarkIC} onClick={handleMarkAsRead}>Mark as read</MenuItem>
       <MenuItem

@@ -149,23 +149,11 @@ function HomeEmpty() {
           </Text>
         }
         options={
-          <>
-            <Button onClick={() => openCreateRoom()} variant="Secondary" size="300">
-              <Text size="B300" truncate>
-                Create Room
-              </Text>
-            </Button>
-            <Button
-              onClick={() => navigate(getExplorePath())}
-              variant="Secondary"
-              fill="Soft"
-              size="300"
-            >
-              <Text size="B300" truncate>
-                Explore Community Rooms
-              </Text>
-            </Button>
-          </>
+          <Button onClick={() => openCreateRoom()} variant="Secondary" size="300">
+            <Text size="B300" truncate>
+              {t('Organisms.DrawerHeader.create_new_room')}
+            </Text>
+          </Button>
         }
       />
     </NavEmptyCenter>

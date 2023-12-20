@@ -122,7 +122,7 @@ export function HeadingBlockButton() {
   const level = headingLevel(editor);
   const [anchor, setAnchor] = useState<RectCords>();
   const isActive = isBlockActive(editor, BlockType.Heading);
-  const modKey = isMacOS() ? KeySymbol.Command : 'Ctrl';
+  const modKey = isMacOS() ? KeySymbol.Command : 'Strg';
 
   const handleMenuSelect = (selectedLevel: HeadingLevel) => {
     setAnchor(undefined);
@@ -252,7 +252,7 @@ export function ExitFormatting({ tooltip }: ExitFormattingProps) {
 
 export function Toolbar() {
   const editor = useSlate();
-  const modKey = isMacOS() ? KeySymbol.Command : 'Ctrl';
+  const modKey = isMacOS() ? KeySymbol.Command : 'Strg';
   const disableInline = isBlockActive(editor, BlockType.CodeBlock);
 
   const canEscape = isAnyMarkActive(editor) || !isBlockActive(editor, BlockType.Paragraph);

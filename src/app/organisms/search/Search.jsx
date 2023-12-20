@@ -225,7 +225,7 @@ function Search() {
           </ScrollView>
         </div>
         <div className="search-dialog__footer">
-          <Text variant="b3">Type # for rooms, @ for DMs and * for spaces. Hotkey: Ctrl + k</Text>
+          <Text variant="b3">Type # for rooms, @ for DMs and * for spaces. Hotkey: Strg + k</Text>
         </div>
       </div>
     </RawModal>

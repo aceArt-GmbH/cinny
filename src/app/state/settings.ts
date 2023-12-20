@@ -34,9 +34,9 @@ const defaultSettings: Settings = {
   editorToolbar: false,
   twitterEmoji: false,
 
-  isPeopleDrawer: true,
+  isPeopleDrawer: false, // collapse peopleDrawer by default
   memberSortFilterIndex: 0,
-  enterForNewline: false,
+  enterForNewline: true,
   messageLayout: 0,
   messageSpacing: '400',
   hideMembershipEvents: false,
