@@ -1,5 +1,5 @@
 const cons = {
-  version: '3.2.0',
+  version: '3.2.0-edeka',
   secretKey: {
     ACCESS_TOKEN: 'cinny_access_token',
     DEVICE_ID: 'cinny_device_id',
@@ -15,7 +15,7 @@ const cons = {
   supportEventTypes: [
     'm.room.create',
     'm.room.message',
-    'm.room.encrypted',
+    'm.room.encrypted', 
     'm.room.member',
     'm.sticker',
   ],
