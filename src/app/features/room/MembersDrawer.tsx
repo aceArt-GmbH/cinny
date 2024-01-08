@@ -255,7 +255,7 @@ export function MembersDrawer({ room }: MembersDrawerProps) {
         <Box grow="Yes" alignItems="Center" gap="200">
           <Box grow="Yes" alignItems="Center" gap="200">
             <Text title={`${room.getJoinedMemberCount()} ${t('Organisms.MembersDrawer.members')}`} size="H5" truncate>
-              {`${millify(room.getJoinedMemberCount())} ${t('Organisms.MembersDrawer.members')}`}
+              {`${t('Organisms.MembersDrawer.members', { count: room.getJoinedMemberCount() })}`}
             </Text>
           </Box>
           <Box shrink="No" alignItems="Center">

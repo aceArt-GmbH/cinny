@@ -1,6 +1,7 @@
 import i18n from 'i18next';
 import Backend, { HttpBackendOptions } from 'i18next-http-backend';
 import { initReactI18next } from 'react-i18next';
+import cons from '../client/state/cons';
 
 i18n
   // i18next-http-backend
@@ -21,6 +22,7 @@ i18n
     load: 'languageOnly',
     backend: {
       loadPath: '/public/locales/{{lng}}.json',
+      queryStringParams: { v: cons.version },
     },
     react: {
       useSuspense: false,
