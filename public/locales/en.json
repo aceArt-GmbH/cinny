@@ -136,7 +136,8 @@
       "unpin_sidebar": "Unpin from sidebar"
     },
     "MembersDrawer": {
-      "members": "Members",
+      "members_one": "{{count}} Member",
+      "members_other": "{{count}} Members",
       "invite_member": "Invite Member",
       "type_name": "Type name...",
       "no": "No",

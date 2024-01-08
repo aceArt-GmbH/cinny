@@ -1,6 +1,6 @@
 import { CompactEmoji, fromUnicodeToHexcode } from 'emojibase';
-import emojisData from 'emojibase-data/en/compact.json';
-import joypixels from 'emojibase-data/en/shortcodes/joypixels.json';
+import emojisData from 'emojibase-data/de/compact.json';
+import joypixels from 'emojibase-data/de/shortcodes/cldr.json';
 import emojibase from 'emojibase-data/en/shortcodes/emojibase.json';
 
 export type IEmoji = CompactEmoji & {
@@ -96,6 +96,7 @@ function getGroupIndex(emoji: IEmoji): number | undefined {
 }
 
 emojisData.forEach((emoji) => {
+  // joypixels & emojibase seem not supported in de
   const myShortCodes = getShortcodesFor(emoji.hexcode);
   if (!myShortCodes) return;
   if (Array.isArray(myShortCodes) && myShortCodes.length === 0) return;
