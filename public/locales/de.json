@@ -74,7 +74,7 @@
     "RoomIntro": {
       "created_by_on": "Erstellt von <user /> am {{time}}",
       "beginning": "Das ist der Start der Unterhaltung.",
-      "invite_member": "Nutzer einladen",
+      "invite_member": "Lerner:in einladen",
       "open_old_room": "Alten Raum öffnen",
       "join_old_room": "Altem Raum beitreten"
     },
@@ -145,8 +145,9 @@
       "unpin_sidebar": "Von Seitenleiste lösen"
     },
     "MembersDrawer": {
-      "members": "Nutzer",
-      "invite_member": "Nutzer einladen",
+      "members_one": "{{count}} Lerner:in",
+      "members_other": "{{count}} Lerner:innen",
+      "invite_member": "Lerner:in einladen",
       "type_name": "Suche nach Name...",
       "no": "Kein",
       "result_zero": "Ergebnis",
@@ -572,7 +573,7 @@
         "already_invited": "Bereits eingeladen",
         "banned": "Gebannt"
       },
-      "search_label": "Name oder Benutzer-ID",
+      "search_label": "Nationale ID",
       "search_result_title": "Suchergebnis für Benutzer {{user_name}}",
       "searching_for_user": "Suche nach Benutzer {{user_name}}...",
       "invite_to_room": "In {{room}} einladen",
