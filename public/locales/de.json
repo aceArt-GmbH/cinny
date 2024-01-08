@@ -68,7 +68,7 @@
     "RoomIntro": {
       "created_by_on": "Erstellt von <user /> am {{time}}",
       "beginning": "Das ist der Start der Unterhaltung.",
-      "invite_member": "Nutzer einladen",
+      "invite_member": "Lerner:in einladen",
       "open_old_room": "Alten Raum öffnen",
       "join_old_room": "Altem Raum beitreten"
     },
@@ -136,8 +136,9 @@
       "unpin_sidebar": "Von Seitenleiste lösen"
     },
     "MembersDrawer": {
-      "members": "Nutzer",
-      "invite_member": "Nutzer einladen",
+      "members_one": "{{count}} Lerner:in",
+      "members_other": "{{count}} Lerner:innen",
+      "invite_member": "Lerner:in einladen",
       "type_name": "Suche nach Name...",
       "no": "Kein",
       "result_one": "Ergebnis",
@@ -172,7 +173,7 @@
           "title": "System-Theme verwenden",
           "description": "Verwende den hellen oder dunklen Modus basierend auf den Systemeinstellungen."
         },
-        "title": "Theme",
+        "title": "Design",
         "theme_light": "Hell",
         "theme_silver": "Silber",
         "theme_dark": "Dunkel",
@@ -231,7 +232,7 @@
         "description": "Versteckte Status- und Nachrichtenevents anzeigen."
       },
       "tabs": {
-        "appearance": "Auftretten",
+        "appearance": "Design (Erscheinungsbild)",
         "notifications": "Benachrichtungen",
         "emoji": "Emoji",
         "security": "Sicherheit",
@@ -546,7 +547,7 @@
         "already_invited": "Bereits eingeladen",
         "banned": "Gebannt"
       },
-      "search_label": "Name oder Benutzer-ID",
+      "search_label": "nationaler ID",
       "search_result_title": "Suchergebnis für Benutzer {{user_name}}",
       "searching_for_user": "Suche nach Benutzer {{user_name}}...",
       "invite_to_room": "In {{room}} einladen",
