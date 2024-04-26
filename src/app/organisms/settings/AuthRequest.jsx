@@ -22,6 +22,40 @@ const getAuthId = (password) => ({
   },
 });
 
+function SsoAuthRequest({ onComplete, makeRequest, session }) {
+    const mountStore = useStore();
+    const [ssoPressed, setSsoPressed] = useState(false);
+    const handleSso = async () => {
+      const baseUrl = `${initMatrix.matrixClient.baseUrl}/_matrix/client/v3/auth/m.login.sso/fallback/web`;
+      window.open(`${baseUrl}?session=${session}`, "_blank");
+      setSsoPressed(true);
+    }
+
+    const handleConfirm = async () => {
+      mountStore.setItem(true);
+      await makeRequest({session});
+      if (!mountStore.getItem()) return;
+      onComplete(true);
+    }
+
+    return (
+      <div className="auth-request">
+        <div className="sso-dialog">
+          <Text variant="s1" weight="medium">Use Single Sign On to continue</Text>
+          <Text>To continue, use Single Sign On to prove your identity.</Text>
+          <div className="buttons-container">
+            { ssoPressed ? <Button variant="primary" onClick={handleConfirm}>Confirm</Button> : <Button variant="primary" onClick={handleSso}>Single Sign-On</Button>}
+          </div>
+        </div>
+      </div>
+    );
+}
+SsoAuthRequest.propTypes = {
+  onComplete: PropTypes.func.isRequired,
+  makeRequest: PropTypes.func.isRequired,
+  session: PropTypes.string.isRequired,
+};
+
 function AuthRequest({ onComplete, makeRequest }) {
   const [status, setStatus] = useState(false);
   const mountStore = useStore();
@@ -88,29 +122,54 @@ export const authRequest = async (title, makeRequest) => {
     lastUsedPassword = undefined;
     if (e.httpStatus !== 401 || e.data?.flows === undefined) return false;
 
-    const { flows } = e.data;
-    const canUsePassword = flows.find((f) => f.stages.includes('m.login.password'));
-    if (!canUsePassword) return false;
+    const { flows, session } = e.data;
+    const canUsePassword = flows.find((f) => f.stages.includes('m.login.password')) || false;
 
-    return new Promise((resolve) => {
-      let isCompleted = false;
-      openReusableDialog(
-        <Text variant="s1" weight="medium">{title}</Text>,
-        (requestClose) => (
-          <AuthRequest
-            onComplete={(done) => {
-              isCompleted = true;
-              resolve(done);
-              requestClose();
-            }}
-            makeRequest={makeRequest}
-          />
-        ),
-        () => {
-          if (!isCompleted) resolve(false);
-        },
-      );
-    });
+    let promise
+    if (canUsePassword) {
+      promise = new Promise((resolve) => {
+        let isCompleted = false;
+        openReusableDialog(
+          <Text variant="s1" weight="medium">{title}</Text>,
+          (requestClose) => (
+            <AuthRequest
+              onComplete={(done) => {
+                isCompleted = true;
+                resolve(done);
+                requestClose();
+              }}
+              makeRequest={makeRequest}
+            />
+          ),
+          () => {
+            if (!isCompleted) resolve(false);
+          },
+        );
+      });
+    } else {
+      promise = new Promise((resolve) => {
+        let isCompleted = false;
+        openReusableDialog(
+          <Text variant="s1" weight="medium">{title}</Text>,
+          (requestClose) => (
+            <SsoAuthRequest
+              session={session}
+              onComplete={(done) => {
+                isCompleted = true;
+                resolve(done);
+                requestClose();
+              }}
+              makeRequest={makeRequest}
+            />
+          ),
+          () => {
+            if (!isCompleted) resolve(false);
+          },
+        );
+      });
+    }
+
+    return promise
   }
 };
 

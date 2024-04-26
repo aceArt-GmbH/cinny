@@ -10,3 +10,9 @@
     margin-top: var(--sp-ultra-tight) !important;
   }
 }
+
+.sso-dialog {
+  & > .text {
+    padding-bottom: var(--sp-normal);
+  }
+}
